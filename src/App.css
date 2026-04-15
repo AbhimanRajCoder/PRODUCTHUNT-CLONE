@@ -1,0 +1,249 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  height: 64px;
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  justify-content: space-between;
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo-placeholder {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.search-bar {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 8px 16px;
+  width: 300px;
+  color: var(--text-secondary);
+}
+
+.nav-item {
+  width: 80px;
+  height: 24px;
+  background-color: var(--bg-color);
+  border-radius: 4px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+}
+
+/* Main Layout */
+.main-content {
+  display: flex;
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  gap: 32px;
+  width: 100%;
+}
+
+/* Sidebars */
+.sidebar-left {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-right {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sidebar-section {
+  background-color: var(--surface-color);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-title {
+  height: 20px;
+  width: 60%;
+  background-color: var(--bg-color);
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.sidebar-item {
+  height: 32px;
+  background-color: var(--bg-color);
+  border-radius: 4px;
+}
+
+/* Feed */
+.feed {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.feed-title {
+  height: 28px;
+  width: 150px;
+  background-color: var(--surface-color);
+  border-radius: 4px;
+}
+
+.feed-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-chip {
+  height: 32px;
+  width: 80px;
+  background-color: var(--surface-color);
+  border-radius: 16px;
+}
+
+.product-card {
+  background-color: var(--surface-color);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  align-items: center;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.product-thumbnail {
+  width: 72px;
+  height: 72px;
+  background-color: var(--bg-color);
+  border-radius: var(--radius);
+}
+
+.product-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-title {
+  height: 20px;
+  width: 40%;
+  background-color: var(--bg-color);
+  border-radius: 4px;
+}
+
+.product-desc {
+  height: 16px;
+  width: 80%;
+  background-color: var(--bg-color);
+  border-radius: 4px;
+}
+
+.product-meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.meta-tag {
+  height: 20px;
+  width: 60px;
+  background-color: var(--bg-color);
+  border-radius: 10px;
+}
+
+.upvote-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background-color: var(--surface-color);
+  gap: 4px;
+}
+
+.upvote-icon {
+  width: 16px;
+  height: 16px;
+  background-color: var(--text-secondary);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.upvote-count {
+  height: 14px;
+  width: 24px;
+  background-color: var(--bg-color);
+  border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .sidebar-right {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-left {
+    display: none;
+  }
+  .main-content {
+    padding: 16px;
+  }
+  .search-bar {
+    display: none;
+  }
+}
