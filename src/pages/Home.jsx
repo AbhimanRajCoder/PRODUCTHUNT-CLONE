@@ -86,7 +86,11 @@ function Home({ searchTerm, setSearchTerm }) {
           </div>
 
           {/* Product List */}
-          {loading && <p>Loading products...</p>}
+          {loading && (
+            <div className="spinner-container">
+              <div className="loading-spinner"></div>
+            </div>
+          )}
           {error && <p className="error-message">Error: {error}</p>}
           {!loading && !error && (
             <ProductList 
