@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import './ProductCard.css';
 
 function ProductCard({ product }) {
@@ -8,40 +9,42 @@ function ProductCard({ product }) {
   const [hasVoted, setHasVoted] = useState(false);
 
   const handleUpvote = async (e) => {
-    e.stopPropagation(); // Prevent card click if we add card navigation later
-    
-    // Optimistic UI update
+    e.stopPropagation();
     const newVoteStatus = !hasVoted;
     const newUpvoteCount = newVoteStatus ? upvotes + 1 : upvotes - 1;
-    
     setHasVoted(newVoteStatus);
     setUpvotes(newUpvoteCount);
 
     try {
-      const response = await fetch(`http://localhost:5001/products/${product.id}`, {
+      await fetch(`http://localhost:5001/products/${product.id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ upvotes: newUpvoteCount }),
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to update upvotes');
-      }
     } catch (error) {
-      console.error('Error updating upvotes:', error);
-      // Rollback on error
       setHasVoted(!newVoteStatus);
       setUpvotes(upvotes);
     }
   };
 
   return (
-    <div 
+    <motion.div 
       className="product-card" 
       id={`product-${product.id}`}
       onClick={() => navigate(`/posts/${product.id}`)}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ 
+        y: -5, 
+        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+        borderColor: "var(--border-color)"
+      }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ 
+        type: "spring", 
+        stiffness: 300, 
+        damping: 20 
+      }}
     >
       {/* Left: Thumbnail */}
       <div className="product-thumbnail">{product.thumbnail}</div>
@@ -100,7 +103,7 @@ function ProductCard({ product }) {
         </svg>
         <span className="upvote-number">{upvotes}</span>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
