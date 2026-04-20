@@ -1,7 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ProductCard.css';
 
 function ProductCard({ product }) {
+  const [upvotes, setUpvotes] = useState(product.upvotes);
+  const [hasVoted, setHasVoted] = useState(false);
+
+  const handleUpvote = async (e) => {
+    e.stopPropagation(); // Prevent card click if we add card navigation later
+    
+    // Optimistic UI update
+    const newVoteStatus = !hasVoted;
+    const newUpvoteCount = newVoteStatus ? upvotes + 1 : upvotes - 1;
+    
+    setHasVoted(newVoteStatus);
+    setUpvotes(newUpvoteCount);
+
+    try {
+      const response = await fetch(`http://localhost:5001/products/${product.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ upvotes: newUpvoteCount }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update upvotes');
+      }
+    } catch (error) {
+      console.error('Error updating upvotes:', error);
+      // Rollback on error
+      setHasVoted(!newVoteStatus);
+      setUpvotes(upvotes);
+    }
+  };
+
   return (
     <div className="product-card" id={`product-${product.id}`}>
       {/* Left: Thumbnail */}
@@ -43,7 +76,10 @@ function ProductCard({ product }) {
       </div>
 
       {/* Right: Upvote Button */}
-      <div className="upvote-box">
+      <div 
+        className={`upvote-box ${hasVoted ? 'active' : ''}`} 
+        onClick={handleUpvote}
+      >
         <svg
           width="14"
           height="14"
@@ -56,7 +92,7 @@ function ProductCard({ product }) {
         >
           <polyline points="18 15 12 9 6 15" />
         </svg>
-        <span className="upvote-number">{product.upvotes}</span>
+        <span className="upvote-number">{upvotes}</span>
       </div>
     </div>
   );

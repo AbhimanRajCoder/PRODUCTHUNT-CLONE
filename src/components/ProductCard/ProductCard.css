@@ -149,6 +149,16 @@
   color: var(--primary-color);
 }
 
+.upvote-box.active {
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+}
+
+.upvote-box.active svg,
+.upvote-box.active .upvote-number {
+  color: #ffffff;
+}
+
 .upvote-number {
   font-size: 13px;
   font-weight: 600;
