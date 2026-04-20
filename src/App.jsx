@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -7,12 +7,14 @@ import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+
   return (
     <Router>
       <div className="app-container">
-        <Navbar />
+        <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} />
           <Route path="/posts/:id" element={<ProductDetail />} />
         </Routes>
       </div>

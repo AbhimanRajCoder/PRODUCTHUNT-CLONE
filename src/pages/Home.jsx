@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Home.css";
 import ProductList from "../components/ProductList/ProductList";
 
-function Home() {
+function Home({ searchTerm, setSearchTerm }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -62,11 +62,11 @@ function Home() {
 
           <div className="sidebar-section">
             <h4 className="sidebar-heading">Trending Topics</h4>
-            <a href="/topic/ai" className="topic-link"># Artificial Intelligence</a>
-            <a href="/topic/saas" className="topic-link"># SaaS</a>
-            <a href="/topic/dev-tools" className="topic-link"># Developer Tools</a>
-            <a href="/topic/design" className="topic-link"># Design</a>
-            <a href="/topic/productivity" className="topic-link"># Productivity</a>
+            <a href="#" className="topic-link" onClick={(e) => { e.preventDefault(); setSearchTerm("AI"); }}># Artificial Intelligence</a>
+            <a href="#" className="topic-link" onClick={(e) => { e.preventDefault(); setSearchTerm("SaaS"); }}># SaaS</a>
+            <a href="#" className="topic-link" onClick={(e) => { e.preventDefault(); setSearchTerm("Developer Tools"); }}># Developer Tools</a>
+            <a href="#" className="topic-link" onClick={(e) => { e.preventDefault(); setSearchTerm("Design"); }}># Design</a>
+            <a href="#" className="topic-link" onClick={(e) => { e.preventDefault(); setSearchTerm("Productivity"); }}># Productivity</a>
           </div>
         </aside>
 
@@ -88,7 +88,18 @@ function Home() {
           {/* Product List */}
           {loading && <p>Loading products...</p>}
           {error && <p className="error-message">Error: {error}</p>}
-          {!loading && !error && <ProductList products={products} />}
+          {!loading && !error && (
+            <ProductList 
+              products={products.filter(product => {
+                if (!searchTerm) return true;
+                const lowerSearch = searchTerm.toLowerCase();
+                const nameMatch = product.name?.toLowerCase().includes(lowerSearch);
+                const taglineMatch = product.tagline?.toLowerCase().includes(lowerSearch);
+                const categoryMatch = product.category?.toLowerCase().includes(lowerSearch);
+                return nameMatch || taglineMatch || categoryMatch;
+              })} 
+            />
+          )}
         </section>
 
         {/* Right Sidebar */}
