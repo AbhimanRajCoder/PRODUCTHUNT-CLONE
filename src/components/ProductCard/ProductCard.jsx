@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ProductCard.css';
 
 function ProductCard({ product }) {
+  const navigate = useNavigate();
   const [upvotes, setUpvotes] = useState(product.upvotes);
   const [hasVoted, setHasVoted] = useState(false);
 
@@ -36,7 +38,11 @@ function ProductCard({ product }) {
   };
 
   return (
-    <div className="product-card" id={`product-${product.id}`}>
+    <div 
+      className="product-card" 
+      id={`product-${product.id}`}
+      onClick={() => navigate(`/posts/${product.id}`)}
+    >
       {/* Left: Thumbnail */}
       <div className="product-thumbnail">{product.thumbnail}</div>
 
