@@ -1,124 +1,165 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Notion AI",
       "tagline": "Your connected AI assistant for docs, projects & knowledge",
       "description": "Notion AI helps you write, brainstorm, edit, summarize, and more — right inside your workspace. It works across your docs, wikis, and projects to save you time and supercharge your productivity.",
       "upvotes": 847,
       "comments": 132,
       "category": "Productivity",
-      "tags": ["Productivity", "AI", "Writing"],
+      "tags": [
+        "Productivity",
+        "AI",
+        "Writing"
+      ],
       "thumbnail": "📝",
       "logoUrl": "https://ph-files.imgix.net/notion-logo.png"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Arc Browser 2.0",
       "tagline": "The internet computer, redesigned",
       "description": "Arc is a Chromium-based browser that rethinks how you organize tabs, spaces, and workflows. Version 2.0 brings Boosts, easels, and a command bar that makes browsing feel like a native app.",
       "upvotes": 623,
       "comments": 89,
       "category": "Developer Tools",
-      "tags": ["Browser", "Design", "Developer Tools"],
+      "tags": [
+        "Browser",
+        "Design",
+        "Developer Tools"
+      ],
       "thumbnail": "🌐",
       "logoUrl": "https://ph-files.imgix.net/arc-logo.png"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Linear 2024",
       "tagline": "Streamline issues, projects & product roadmaps",
       "description": "Linear is a modern project management tool for teams who build products. It combines issue tracking with beautiful design and lightning-fast performance for a seamless developer experience.",
       "upvotes": 512,
       "comments": 74,
       "category": "Project Management",
-      "tags": ["Project Management", "Developer Tools", "SaaS"],
+      "tags": [
+        "Project Management",
+        "Developer Tools",
+        "SaaS"
+      ],
       "thumbnail": "⚡",
       "logoUrl": "https://ph-files.imgix.net/linear-logo.png"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Raycast Pro",
       "tagline": "Your shortcut to everything on Mac",
       "description": "Raycast replaces Spotlight with a blazingly fast launcher that lets you control tools, run scripts, and manage tasks. Pro adds AI commands, cloud sync, and team collaboration features.",
       "upvotes": 438,
       "comments": 56,
       "category": "Productivity",
-      "tags": ["Mac", "Productivity", "Developer Tools"],
+      "tags": [
+        "Mac",
+        "Productivity",
+        "Developer Tools"
+      ],
       "thumbnail": "🚀",
       "logoUrl": "https://ph-files.imgix.net/raycast-logo.png"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Cal.com v4",
       "tagline": "Open source scheduling for absolutely everyone",
       "description": "Cal.com is the open-source Calendly alternative. v4 introduces round-robin scheduling, team event types, and a powerful workflow engine — all fully self-hostable and free to use.",
       "upvotes": 391,
       "comments": 47,
       "category": "SaaS",
-      "tags": ["Scheduling", "Open Source", "SaaS"],
+      "tags": [
+        "Scheduling",
+        "Open Source",
+        "SaaS"
+      ],
       "thumbnail": "📅",
       "logoUrl": "https://ph-files.imgix.net/calcom-logo.png"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Midjourney V7",
       "tagline": "Next-gen AI image generation with photorealism",
       "description": "Midjourney V7 delivers a massive leap in photorealism, coherence, and prompt understanding. Create stunning visuals from text prompts with unprecedented control over style and composition.",
       "upvotes": 1024,
       "comments": 203,
       "category": "AI",
-      "tags": ["AI", "Design", "Art"],
+      "tags": [
+        "AI",
+        "Design",
+        "Art"
+      ],
       "thumbnail": "🎨",
       "logoUrl": "https://ph-files.imgix.net/midjourney-logo.png"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Supabase Studio",
       "tagline": "The open-source Firebase alternative, now with a visual editor",
       "description": "Supabase gives you a Postgres database, authentication, storage, and edge functions. Studio adds a beautiful visual editor for building schemas, writing queries, and managing your backend.",
       "upvotes": 567,
       "comments": 91,
       "category": "Developer Tools",
-      "tags": ["Database", "Open Source", "Backend"],
+      "tags": [
+        "Database",
+        "Open Source",
+        "Backend"
+      ],
       "thumbnail": "💾",
       "logoUrl": "https://ph-files.imgix.net/supabase-logo.png"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Figma Slides",
       "tagline": "Design presentations that move people",
       "description": "Figma Slides brings the power of Figma's design tools to presentations. Create interactive, beautifully animated decks collaboratively — no more exporting static PNGs into boring slide tools.",
       "upvotes": 715,
       "comments": 118,
       "category": "Design",
-      "tags": ["Design", "Presentations", "Collaboration"],
+      "tags": [
+        "Design",
+        "Presentations",
+        "Collaboration"
+      ],
       "thumbnail": "🎯",
       "logoUrl": "https://ph-files.imgix.net/figma-logo.png"
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "Cursor IDE",
       "tagline": "The AI-first code editor built for pair programming",
       "description": "Cursor is a fork of VS Code with deep AI integration. It predicts your next edit, answers questions about your codebase, and lets you refactor large files with natural language — all locally and fast.",
-      "upvotes": 932,
+      "upvotes": 934,
       "comments": 176,
       "category": "Developer Tools",
-      "tags": ["AI", "Developer Tools", "Code Editor"],
+      "tags": [
+        "AI",
+        "Developer Tools",
+        "Code Editor"
+      ],
       "thumbnail": "🖥️",
       "logoUrl": "https://ph-files.imgix.net/cursor-logo.png"
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "Resend",
       "tagline": "Email API for developers that just works",
       "description": "Resend is a modern email API built for developers. Send transactional and marketing emails with a beautiful dashboard, React email templates, and best-in-class deliverability out of the box.",
       "upvotes": 489,
       "comments": 63,
       "category": "Developer Tools",
-      "tags": ["Email", "API", "Developer Tools"],
+      "tags": [
+        "Email",
+        "API",
+        "Developer Tools"
+      ],
       "thumbnail": "✉️",
       "logoUrl": "https://ph-files.imgix.net/resend-logo.png"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
