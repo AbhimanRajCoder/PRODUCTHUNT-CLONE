@@ -147,7 +147,7 @@
 
 /* Specific styling for Comments */
 .comment-box:hover {
-  border-color: #3b82f6; /* A soft blue for comments */
+  border-color: #3b82f6;
   background-color: #f0f7ff;
 }
 
@@ -156,28 +156,71 @@
 }
 
 /* ===========================
-   Responsive
+   Mobile Responsiveness (Modern Stacked Layout)
    =========================== */
 
 @media (max-width: 600px) {
   .product-card {
-    padding: 14px;
+    display: grid;
+    grid-template-areas: 
+      "thumb info"
+      "actions actions";
+    grid-template-columns: 48px 1fr;
     gap: 12px;
+    padding: 16px;
   }
 
   .product-thumbnail {
-    width: 52px;
-    height: 52px;
-    min-width: 52px;
-    font-size: 24px;
+    grid-area: thumb;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    font-size: 22px;
+  }
+
+  .product-info {
+    grid-area: info;
+  }
+
+  .product-name {
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+
+  .product-tagline {
+    font-size: 13px;
+    margin-bottom: 4px;
   }
 
   .product-description {
-    display: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Show 2 lines of description on mobile */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 12px;
+    margin-top: 4px;
+    color: #9ca3af;
   }
 
-  .upvote-box {
-    min-width: 48px;
-    height: 56px;
+  .product-actions {
+    grid-area: actions;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-color);
+  }
+
+  .action-box {
+    min-width: 60px;
+    height: 42px;
+    flex-direction: row;
+    gap: 8px;
+    padding: 0 14px;
+    border-radius: 21px;
+  }
+
+  .action-number {
+    font-size: 12px;
   }
 }

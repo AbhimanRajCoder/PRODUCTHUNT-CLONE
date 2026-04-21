@@ -291,36 +291,81 @@
 }
 
 /* ===========================
-   Responsive Layout
+   Responsive Layout (Multi-Step Breakdown)
    =========================== */
 
-@media (max-width: 1024px) {
+/* Laptop/Large Screen (Default): All 3 visible */
+
+/* Tablet/Mid-size: Hide Right Sidebar, keep Left Sidebar + Feed */
+@media (max-width: 1100px) {
   .home-sidebar-right {
     display: none;
+  }
+  
+  .home-container {
+    max-width: 900px;
   }
 }
 
+/* Mobile/Small Screen: Only Home Feed visible */
 @media (max-width: 768px) {
-  .home-sidebar-left,
-  .home-sidebar-right {
+  .home-sidebar-left {
     display: none;
   }
 
-  .home-container {
-    flex-direction: column;
-  }
-
-  .home-feed {
-    width: 100%;
-    flex: none;
-  }
-
   .home-page {
-    padding: 16px;
+    padding: 12px 16px;
+  }
+
+  .home-container {
+    padding: 0;
+    justify-content: center;
   }
 
   .feed-header {
     flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    padding: 12px 0 32px 0;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .feed-title {
+    font-size: 32px;
+    letter-spacing: -0.04em;
+    margin-bottom: 4px;
+  }
+
+  .feed-date {
+    font-size: 12px;
+    margin-bottom: 12px;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+  }
+
+  .feed-filters {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    padding: 4px 0;
+    gap: 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .feed-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border-radius: 25px;
+    box-shadow: var(--shadow-sm);
   }
 }
