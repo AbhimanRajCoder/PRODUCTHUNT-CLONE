@@ -7,6 +7,7 @@ function Home({ searchTerm, setSearchTerm }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [threads, setThreads] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -24,7 +25,20 @@ function Home({ searchTerm, setSearchTerm }) {
       }
     };
 
+    const fetchThreads = async () => {
+      try {
+        const response = await fetch("http://localhost:5001/threads");
+        if (response.ok) {
+          const data = await response.json();
+          setThreads(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch threads:", err);
+      }
+    };
+
     fetchProducts();
+    fetchThreads();
   }, []);
 
   // Sorting and Filtering Logic
@@ -86,13 +100,46 @@ function Home({ searchTerm, setSearchTerm }) {
             </a>
           </div>
 
-          <div className="sidebar-section">
-            <h4 className="sidebar-heading">Trending Topics</h4>
-            <a href="#" className="topic-link" onClick={(e) => { e.preventDefault(); setSearchTerm("AI"); }}># Artificial Intelligence</a>
-            <a href="#" className="topic-link" onClick={(e) => { e.preventDefault(); setSearchTerm("SaaS"); }}># SaaS</a>
-            <a href="#" className="topic-link" onClick={(e) => { e.preventDefault(); setSearchTerm("Developer Tools"); }}># Developer Tools</a>
-            <a href="#" className="topic-link" onClick={(e) => { e.preventDefault(); setSearchTerm("Design"); }}># Design</a>
-            <a href="#" className="topic-link" onClick={(e) => { e.preventDefault(); setSearchTerm("Productivity"); }}># Productivity</a>
+          <div className="sidebar-section threads-section">
+            <h4 className="sidebar-heading">Trending Forum Threads</h4>
+            <div className="threads-list">
+              {threads.map(thread => (
+                <div key={thread.id} className="thread-item">
+                  <div className="thread-meta">
+                    <span className="thread-icon">{thread.icon}</span>
+                    <span className="thread-community">{thread.community}</span>
+                  </div>
+                  <h5 className="thread-title">{thread.title}</h5>
+                  <div className="thread-stats">
+                    <span className="thread-stat">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="18 15 12 9 6 15" /></svg>
+                      Upvote ({thread.upvotes})
+                    </span>
+                    <span className="stat-dot">·</span>
+                    <span className="thread-stat">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
+                      {thread.comments}
+                    </span>
+                    {thread.online > 0 && (
+                      <>
+                        <span className="stat-dot">·</span>
+                        <span className="thread-stat">
+                          <span className="online-dot"></span>
+                          {thread.online} online
+                        </span>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="threads-actions">
+              <button className="btn-thread-secondary">View all</button>
+              <button className="btn-thread-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /><path d="M12 7v6M9 10h6" /></svg>
+                Start new thread
+              </button>
+            </div>
           </div>
         </aside>
 

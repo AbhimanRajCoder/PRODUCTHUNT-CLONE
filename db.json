@@ -8,7 +8,11 @@
       "upvotes": 848,
       "comments": 132,
       "category": "Productivity",
-      "tags": ["Productivity", "AI", "Writing"],
+      "tags": [
+        "Productivity",
+        "AI",
+        "Writing"
+      ],
       "thumbnail": "📝",
       "logoUrl": "https://ph-files.imgix.net/notion-logo.png",
       "createdAt": "2024-04-20T10:00:00Z",
@@ -22,7 +26,11 @@
       "upvotes": 623,
       "comments": 89,
       "category": "Developer Tools",
-      "tags": ["Browser", "Design", "Developer Tools"],
+      "tags": [
+        "Browser",
+        "Design",
+        "Developer Tools"
+      ],
       "thumbnail": "🌐",
       "logoUrl": "https://ph-files.imgix.net/arc-logo.png",
       "createdAt": "2024-04-21T09:00:00Z",
@@ -36,7 +44,11 @@
       "upvotes": 512,
       "comments": 74,
       "category": "Project Management",
-      "tags": ["Project Management", "Developer Tools", "SaaS"],
+      "tags": [
+        "Project Management",
+        "Developer Tools",
+        "SaaS"
+      ],
       "thumbnail": "⚡",
       "logoUrl": "https://ph-files.imgix.net/linear-logo.png",
       "createdAt": "2024-04-19T08:30:00Z",
@@ -50,7 +62,11 @@
       "upvotes": 438,
       "comments": 56,
       "category": "Productivity",
-      "tags": ["Mac", "Productivity", "Developer Tools"],
+      "tags": [
+        "Mac",
+        "Productivity",
+        "Developer Tools"
+      ],
       "thumbnail": "🚀",
       "logoUrl": "https://ph-files.imgix.net/raycast-logo.png",
       "createdAt": "2024-04-22T11:00:00Z",
@@ -64,7 +80,11 @@
       "upvotes": 391,
       "comments": 47,
       "category": "SaaS",
-      "tags": ["Scheduling", "Open Source", "SaaS"],
+      "tags": [
+        "Scheduling",
+        "Open Source",
+        "SaaS"
+      ],
       "thumbnail": "📅",
       "logoUrl": "https://ph-files.imgix.net/calcom-logo.png",
       "createdAt": "2024-04-18T14:20:00Z",
@@ -78,7 +98,11 @@
       "upvotes": 1024,
       "comments": 203,
       "category": "AI",
-      "tags": ["AI", "Design", "Art"],
+      "tags": [
+        "AI",
+        "Design",
+        "Art"
+      ],
       "thumbnail": "🎨",
       "logoUrl": "https://ph-files.imgix.net/midjourney-logo.png",
       "createdAt": "2024-04-22T15:45:00Z",
@@ -92,7 +116,11 @@
       "upvotes": 567,
       "comments": 91,
       "category": "Developer Tools",
-      "tags": ["Database", "Open Source", "Backend"],
+      "tags": [
+        "Database",
+        "Open Source",
+        "Backend"
+      ],
       "thumbnail": "💾",
       "logoUrl": "https://ph-files.imgix.net/supabase-logo.png",
       "createdAt": "2024-04-17T16:10:00Z",
@@ -106,7 +134,11 @@
       "upvotes": 715,
       "comments": 118,
       "category": "Design",
-      "tags": ["Design", "Presentations", "Collaboration"],
+      "tags": [
+        "Design",
+        "Presentations",
+        "Collaboration"
+      ],
       "thumbnail": "🎯",
       "logoUrl": "https://ph-files.imgix.net/figma-logo.png",
       "createdAt": "2024-04-16T12:00:00Z",
@@ -120,7 +152,11 @@
       "upvotes": 934,
       "comments": 176,
       "category": "Developer Tools",
-      "tags": ["AI", "Developer Tools", "Code Editor"],
+      "tags": [
+        "AI",
+        "Developer Tools",
+        "Code Editor"
+      ],
       "thumbnail": "🖥️",
       "logoUrl": "https://ph-files.imgix.net/cursor-logo.png",
       "createdAt": "2024-04-22T18:30:00Z",
@@ -134,7 +170,11 @@
       "upvotes": 489,
       "comments": 63,
       "category": "Developer Tools",
-      "tags": ["Email", "API", "Developer Tools"],
+      "tags": [
+        "Email",
+        "API",
+        "Developer Tools"
+      ],
       "thumbnail": "✉️",
       "logoUrl": "https://ph-files.imgix.net/resend-logo.png",
       "createdAt": "2024-04-15T10:00:00Z",
@@ -148,7 +188,10 @@
       "upvotes": 320,
       "comments": 45,
       "category": "Productivity",
-      "tags": ["Productivity", "Calendar"],
+      "tags": [
+        "Productivity",
+        "Calendar"
+      ],
       "thumbnail": "📅",
       "logoUrl": "https://ph-files.imgix.net/cron-logo.png",
       "createdAt": "2024-04-14T09:00:00Z",
@@ -162,7 +205,10 @@
       "upvotes": 150,
       "comments": 22,
       "category": "Design",
-      "tags": ["AI", "Photography"],
+      "tags": [
+        "AI",
+        "Photography"
+      ],
       "thumbnail": "🖼️",
       "logoUrl": "https://ph-files.imgix.net/framed-logo.png",
       "createdAt": "2024-04-22T19:00:00Z",
@@ -176,7 +222,10 @@
       "upvotes": 412,
       "comments": 67,
       "category": "SaaS",
-      "tags": ["Publishing", "Open Source"],
+      "tags": [
+        "Publishing",
+        "Open Source"
+      ],
       "thumbnail": "👻",
       "logoUrl": "https://ph-files.imgix.net/ghost-logo.png",
       "createdAt": "2024-04-13T11:00:00Z",
@@ -190,7 +239,10 @@
       "upvotes": 890,
       "comments": 145,
       "category": "Developer Tools",
-      "tags": ["CSS", "Frontend"],
+      "tags": [
+        "CSS",
+        "Frontend"
+      ],
       "thumbnail": "🎨",
       "logoUrl": "https://ph-files.imgix.net/tailwind-logo.png",
       "createdAt": "2024-04-12T14:00:00Z",
@@ -204,7 +256,10 @@
       "upvotes": 756,
       "comments": 98,
       "category": "Developer Tools",
-      "tags": ["Cloud", "Deployment"],
+      "tags": [
+        "Cloud",
+        "Deployment"
+      ],
       "thumbnail": "🚢",
       "logoUrl": "https://ph-files.imgix.net/vercel-logo.png",
       "createdAt": "2024-04-22T20:00:00Z",
@@ -218,7 +273,10 @@
       "upvotes": 543,
       "comments": 76,
       "category": "Design",
-      "tags": ["3D", "Web Design"],
+      "tags": [
+        "3D",
+        "Web Design"
+      ],
       "thumbnail": "🧱",
       "logoUrl": "https://ph-files.imgix.net/spline-logo.png",
       "createdAt": "2024-04-11T10:00:00Z",
@@ -232,7 +290,10 @@
       "upvotes": 421,
       "comments": 54,
       "category": "Developer Tools",
-      "tags": ["Analytics", "Open Source"],
+      "tags": [
+        "Analytics",
+        "Open Source"
+      ],
       "thumbnail": "🦔",
       "logoUrl": "https://ph-files.imgix.net/posthog-logo.png",
       "createdAt": "2024-04-10T09:00:00Z",
@@ -246,7 +307,10 @@
       "upvotes": 612,
       "comments": 82,
       "category": "Developer Tools",
-      "tags": ["Cloud", "SaaS"],
+      "tags": [
+        "Cloud",
+        "SaaS"
+      ],
       "thumbnail": "🛤️",
       "logoUrl": "https://ph-files.imgix.net/railway-logo.png",
       "createdAt": "2024-04-22T21:00:00Z",
@@ -260,7 +324,10 @@
       "upvotes": 823,
       "comments": 112,
       "category": "Productivity",
-      "tags": ["Open Source", "Design"],
+      "tags": [
+        "Open Source",
+        "Design"
+      ],
       "thumbnail": "✏️",
       "logoUrl": "https://ph-files.imgix.net/excalidraw-logo.png",
       "createdAt": "2024-04-09T14:00:00Z",
@@ -274,7 +341,10 @@
       "upvotes": 498,
       "comments": 65,
       "category": "Developer Tools",
-      "tags": ["Database", "Cloud"],
+      "tags": [
+        "Database",
+        "Cloud"
+      ],
       "thumbnail": "🪐",
       "logoUrl": "https://ph-files.imgix.net/planetscale-logo.png",
       "createdAt": "2024-04-08T10:00:00Z",
@@ -288,7 +358,10 @@
       "upvotes": 310,
       "comments": 38,
       "category": "Developer Tools",
-      "tags": ["Auth", "SaaS"],
+      "tags": [
+        "Auth",
+        "SaaS"
+      ],
       "thumbnail": "🔐",
       "logoUrl": "https://ph-files.imgix.net/auth0-logo.png",
       "createdAt": "2024-04-07T09:00:00Z",
@@ -302,7 +375,10 @@
       "upvotes": 956,
       "comments": 189,
       "category": "Productivity",
-      "tags": ["Video", "Productivity"],
+      "tags": [
+        "Video",
+        "Productivity"
+      ],
       "thumbnail": "🎬",
       "logoUrl": "https://ph-files.imgix.net/loom-logo.png",
       "createdAt": "2024-04-06T11:00:00Z",
@@ -316,7 +392,10 @@
       "upvotes": 678,
       "comments": 94,
       "category": "Productivity",
-      "tags": ["Collaboration", "SaaS"],
+      "tags": [
+        "Collaboration",
+        "SaaS"
+      ],
       "thumbnail": "🎨",
       "logoUrl": "https://ph-files.imgix.net/miro-logo.png",
       "createdAt": "2024-04-05T14:00:00Z",
@@ -330,7 +409,10 @@
       "upvotes": 845,
       "comments": 121,
       "category": "Design",
-      "tags": ["Design", "No Code"],
+      "tags": [
+        "Design",
+        "No Code"
+      ],
       "thumbnail": "📐",
       "logoUrl": "https://ph-files.imgix.net/framer-logo.png",
       "createdAt": "2024-04-04T10:00:00Z",
@@ -344,7 +426,10 @@
       "upvotes": 532,
       "comments": 68,
       "category": "Developer Tools",
-      "tags": ["Internal Tools", "Low Code"],
+      "tags": [
+        "Internal Tools",
+        "Low Code"
+      ],
       "thumbnail": "🛠️",
       "logoUrl": "https://ph-files.imgix.net/retool-logo.png",
       "createdAt": "2024-04-03T09:00:00Z",
@@ -358,7 +443,10 @@
       "upvotes": 912,
       "comments": 167,
       "category": "SaaS",
-      "tags": ["Automation", "No Code"],
+      "tags": [
+        "Automation",
+        "No Code"
+      ],
       "thumbnail": "⚡",
       "logoUrl": "https://ph-files.imgix.net/zapier-logo.png",
       "createdAt": "2024-04-02T11:00:00Z",
@@ -372,7 +460,10 @@
       "upvotes": 445,
       "comments": 59,
       "category": "Developer Tools",
-      "tags": ["Monitoring", "SaaS"],
+      "tags": [
+        "Monitoring",
+        "SaaS"
+      ],
       "thumbnail": "🚨",
       "logoUrl": "https://ph-files.imgix.net/sentry-logo.png",
       "createdAt": "2024-04-01T14:00:00Z",
@@ -386,7 +477,10 @@
       "upvotes": 389,
       "comments": 47,
       "category": "SaaS",
-      "tags": ["API", "Communications"],
+      "tags": [
+        "API",
+        "Communications"
+      ],
       "thumbnail": "📞",
       "logoUrl": "https://ph-files.imgix.net/twilio-logo.png",
       "createdAt": "2024-03-31T10:00:00Z",
@@ -397,10 +491,13 @@
       "name": "Stripe",
       "tagline": "Financial infrastructure for the internet",
       "description": "Stripe provides all the tools you need to accept payments, manage subscriptions, and scale your business.",
-      "upvotes": 1200,
+      "upvotes": 1201,
       "comments": 345,
       "category": "SaaS",
-      "tags": ["Payments", "API"],
+      "tags": [
+        "Payments",
+        "API"
+      ],
       "thumbnail": "💳",
       "logoUrl": "https://ph-files.imgix.net/stripe-logo.png",
       "createdAt": "2024-03-30T09:00:00Z",
@@ -414,7 +511,10 @@
       "upvotes": 654,
       "comments": 88,
       "category": "Developer Tools",
-      "tags": ["Network", "Cloud"],
+      "tags": [
+        "Network",
+        "Cloud"
+      ],
       "thumbnail": "☁️",
       "logoUrl": "https://ph-files.imgix.net/cloudflare-logo.png",
       "createdAt": "2024-03-29T11:00:00Z",
@@ -428,7 +528,10 @@
       "upvotes": 789,
       "comments": 123,
       "category": "AI",
-      "tags": ["AI", "Open Source"],
+      "tags": [
+        "AI",
+        "Open Source"
+      ],
       "thumbnail": "🤗",
       "logoUrl": "https://ph-files.imgix.net/huggingface-logo.png",
       "createdAt": "2024-04-22T22:00:00Z",
@@ -442,7 +545,10 @@
       "upvotes": 432,
       "comments": 54,
       "category": "AI",
-      "tags": ["AI", "Cloud"],
+      "tags": [
+        "AI",
+        "Cloud"
+      ],
       "thumbnail": "🚀",
       "logoUrl": "https://ph-files.imgix.net/replicate-logo.png",
       "createdAt": "2024-04-22T23:00:00Z",
@@ -456,7 +562,10 @@
       "upvotes": 321,
       "comments": 42,
       "category": "Developer Tools",
-      "tags": ["AI", "Analytics"],
+      "tags": [
+        "AI",
+        "Analytics"
+      ],
       "thumbnail": "📉",
       "logoUrl": "https://ph-files.imgix.net/wandb-logo.png",
       "createdAt": "2024-04-22T08:00:00Z",
@@ -470,7 +579,10 @@
       "upvotes": 987,
       "comments": 198,
       "category": "AI",
-      "tags": ["AI", "LLM"],
+      "tags": [
+        "AI",
+        "LLM"
+      ],
       "thumbnail": "🧠",
       "logoUrl": "https://ph-files.imgix.net/anthropic-logo.png",
       "createdAt": "2024-04-22T07:00:00Z",
@@ -484,7 +596,10 @@
       "upvotes": 876,
       "comments": 145,
       "category": "AI",
-      "tags": ["AI", "Search"],
+      "tags": [
+        "AI",
+        "Search"
+      ],
       "thumbnail": "🔍",
       "logoUrl": "https://ph-files.imgix.net/perplexity-logo.png",
       "createdAt": "2024-04-22T06:00:00Z",
@@ -498,7 +613,10 @@
       "upvotes": 654,
       "comments": 89,
       "category": "AI",
-      "tags": ["AI", "Audio"],
+      "tags": [
+        "AI",
+        "Audio"
+      ],
       "thumbnail": "🎙️",
       "logoUrl": "https://ph-files.imgix.net/elevenlabs-logo.png",
       "createdAt": "2024-04-22T05:00:00Z",
@@ -512,7 +630,10 @@
       "upvotes": 543,
       "comments": 76,
       "category": "AI",
-      "tags": ["AI", "Video"],
+      "tags": [
+        "AI",
+        "Video"
+      ],
       "thumbnail": "📹",
       "logoUrl": "https://ph-files.imgix.net/heygen-logo.png",
       "createdAt": "2024-04-22T04:00:00Z",
@@ -526,7 +647,10 @@
       "upvotes": 732,
       "comments": 112,
       "category": "AI",
-      "tags": ["AI", "Video"],
+      "tags": [
+        "AI",
+        "Video"
+      ],
       "thumbnail": "🎬",
       "logoUrl": "https://ph-files.imgix.net/runway-logo.png",
       "createdAt": "2024-04-22T03:00:00Z",
@@ -540,7 +664,10 @@
       "upvotes": 421,
       "comments": 54,
       "category": "AI",
-      "tags": ["AI", "Productivity"],
+      "tags": [
+        "AI",
+        "Productivity"
+      ],
       "thumbnail": "📖",
       "logoUrl": "https://ph-files.imgix.net/tome-logo.png",
       "createdAt": "2024-04-22T02:00:00Z",
@@ -554,11 +681,52 @@
       "upvotes": 210,
       "comments": 32,
       "category": "AI",
-      "tags": ["AI", "Design"],
+      "tags": [
+        "AI",
+        "Design"
+      ],
       "thumbnail": "🎨",
       "logoUrl": "https://ph-files.imgix.net/logoai-logo.png",
       "createdAt": "2024-04-22T01:00:00Z",
       "isFeatured": false
+    }
+  ],
+  "threads": [
+    {
+      "id": "1",
+      "community": "p/opticlear-storage-cleaner",
+      "icon": "🧼",
+      "title": "Had to kill my favorite feature to survive Apple Review 🍎✂️ (Referral System)",
+      "upvotes": 109,
+      "comments": 26,
+      "online": 5
+    },
+    {
+      "id": "2",
+      "community": "p/general",
+      "icon": "💬",
+      "title": "How do you decide what features should be free and what should be paid?",
+      "upvotes": 548,
+      "comments": 422,
+      "online": 5
+    },
+    {
+      "id": "3",
+      "community": "p/general",
+      "icon": "🚀",
+      "title": "Build your brand before your product, or launch first and reveal yourself later?",
+      "upvotes": 112,
+      "comments": 125,
+      "online": 6
+    },
+    {
+      "id": "4",
+      "community": "p/mindpal-ai",
+      "icon": "🧠",
+      "title": "Holy shit... I just automated sth I thought was impossible with AI: product tutorial videos",
+      "upvotes": 126,
+      "comments": 49,
+      "online": 0
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
