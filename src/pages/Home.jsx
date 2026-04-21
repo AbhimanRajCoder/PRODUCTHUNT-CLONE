@@ -74,7 +74,7 @@ function Home({ searchTerm, setSearchTerm }) {
         <section className="home-feed">
           {/* Feed Header */}
           <div className="feed-header">
-            <div>
+            <div className="feed-title-container">
               <h1 className="feed-title">Today's Top Products</h1>
               <p className="feed-date">{today}</p>
             </div>

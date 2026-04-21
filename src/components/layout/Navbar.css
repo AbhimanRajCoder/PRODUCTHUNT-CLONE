@@ -11,10 +11,12 @@
   position: fixed;
   top: 0;
   width: 100%;
-  height:100px;
-  background: var(--bg-main);
-  border-bottom: 2px solid var(--border-color);
+  height: 80px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-color);
   z-index: 100;
+  transition: all 0.3s ease;
 }
 
 .navbar-container {
@@ -56,26 +58,28 @@
   position: relative;
   display: flex;
   align-items: center;
-  height: 50px;
+  height: 44px;
 }
 
 .search-box svg {
   position: absolute;
-  left: 18px;
-  color: var(--text-secondary);
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
   pointer-events: none;
 }
 
 .search-box input {
-  width: 230px;
-  height: 80%;
-  padding: 0 20px 0 52px;
-  border-radius: 25px;
-  border: 1px solid #000;
-  background: rgba(0, 0, 0, 0.04);
-  font-size: 15px;
+  width: 260px;
+  height: 100%;
+  padding: 0 16px 0 44px;
+  border-radius: 22px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 14px;
   color: var(--text-primary);
-  font-weight: 700;
+  font-weight: 500;
   outline: none;
   transition: all 0.2s ease;
 }
@@ -95,9 +99,9 @@
 
 .navbar-center ul {
   display: flex;
-  gap: 40px;
+  gap: 24px;
   list-style: none;
-  margin: 0 5%;
+  margin: 0;
   padding: 0;
   height: 100%;
   align-items: center;
@@ -111,13 +115,13 @@
 
 .navbar-center a {
   text-decoration: none;
-  font-weight: 700;
-  color: var(--text-secondary);
-  font-size: 17px;
+  font-weight: 600;
+  color: #4b5563;
+  font-size: 15px;
   display: flex;
   align-items: center;
   height: 100%;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
   white-space: nowrap;
 }
 
@@ -126,13 +130,15 @@
 }
 
 .navbar-center a svg {
-  margin-left: 6px;
+  margin-left: 4px;
+  width: 12px;
+  height: 12px;
   stroke: currentColor;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .navbar-center a:hover svg {
-  transform: rotate(-90deg);
+  transform: translateY(2px);
 }
 
 .navbar-right {
@@ -144,51 +150,53 @@
 }
 
 .btn-outline {
-  width:150px;
-  height: 50px;
-  padding: 0 14px;
-  border-radius: 25px;
-  border: 2px solid #000;
-  background: var(--purple);
-  color: #1a1a1a;
-  font-weight: 700;
+  height: 42px;
+  padding: 0 20px;
+  border-radius: 21px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  color: #374151;
+  font-weight: 600;
   font-size: 14px;
   text-decoration: none;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap:5px;
+  gap: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .btn-outline:hover {
-  background: #c8b0e0;
-  transform: translateY(-2px);
+  background: #f9fafb;
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary {
-  width:150px;
-  height: 50px;
-  padding: 0 28px;
-  border-radius: 25px;
-  border: 2px solid #000;
+  height: 42px;
+  padding: 0 24px;
+  border-radius: 21px;
+  border: none;
   background: var(--accent);
   color: white;
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  white-space: nowrap; /* Prevent wrapping */
+  gap: 8px;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .btn-primary:hover {
-  opacity: 0.95;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255, 97, 84, 0.25);
+  background: #e5554a;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(255, 97, 84, 0.3);
 }
 
 /* RESPONSIVE */

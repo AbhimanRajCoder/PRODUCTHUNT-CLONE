@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding-top: 100px; /* Offset for fixed navbar */
+  padding-top: 80px; /* Offset for fixed navbar */
 }
 
 .nav-left, .nav-right {
@@ -103,32 +103,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.feed-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.feed-title {
-  height: 28px;
-  width: 150px;
-  background-color: var(--surface-color);
-  border-radius: 4px;
-}
-
-.feed-filters {
-  display: flex;
-  gap: 8px;
-}
-
-.filter-chip {
-  height: 32px;
-  width: 80px;
-  background-color: var(--surface-color);
-  border-radius: 16px;
 }
 
 .product-card {
