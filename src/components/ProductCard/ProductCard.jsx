@@ -64,44 +64,46 @@ function ProductCard({ product }) {
           ))}
         </div>
 
-        {/* Stats: comments */}
-        <div className="product-stats">
-          <span className="stat-item">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-            {product.comments}
-          </span>
-        </div>
       </div>
 
-      {/* Right: Upvote Button */}
-      <div 
-        className={`upvote-box ${hasVoted ? 'active' : ''}`} 
-        onClick={handleUpvote}
-      >
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+      {/* Right: Actions */}
+      <div className="product-actions">
+        {/* Comment Box */}
+        <div className="action-box comment-box">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          <span className="action-number">{product.comments}</span>
+        </div>
+
+        {/* Upvote Box */}
+        <div 
+          className={`action-box upvote-box ${hasVoted ? 'active' : ''}`} 
+          onClick={handleUpvote}
         >
-          <polyline points="18 15 12 9 6 15" />
-        </svg>
-        <span className="upvote-number">{upvotes}</span>
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="18 15 12 9 6 15" />
+          </svg>
+          <span className="action-number">{upvotes}</span>
+        </div>
       </div>
     </motion.div>
   );

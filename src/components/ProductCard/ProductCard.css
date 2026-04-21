@@ -89,30 +89,17 @@
   background-color: #e5e7eb;
 }
 
-/* Stats (comments) */
+/* Actions (Upvote and Comments) */
 
-.product-stats {
+.product-actions {
   display: flex;
-  align-items: center;
   gap: 12px;
+  align-items: flex-start;
+  flex-shrink: 0;
   margin-top: 4px;
 }
 
-.stat-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.stat-item svg {
-  opacity: 0.6;
-}
-
-/* Upvote Box */
-
-.upvote-box {
+.action-box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -123,19 +110,25 @@
   border-radius: var(--radius);
   background-color: var(--surface-color);
   gap: 4px;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-  flex-shrink: 0;
-  margin-top: 4px;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
+.action-box svg {
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.action-number {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Specific styling for Upvote */
 .upvote-box:hover {
   border-color: var(--primary-color);
   background-color: #fff5f3;
-}
-
-.upvote-box svg {
-  color: var(--text-secondary);
-  transition: color 0.2s ease;
 }
 
 .upvote-box:hover svg {
@@ -148,14 +141,18 @@
 }
 
 .upvote-box.active svg,
-.upvote-box.active .upvote-number {
+.upvote-box.active .action-number {
   color: #ffffff;
 }
 
-.upvote-number {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
+/* Specific styling for Comments */
+.comment-box:hover {
+  border-color: #3b82f6; /* A soft blue for comments */
+  background-color: #f0f7ff;
+}
+
+.comment-box:hover svg {
+  color: #3b82f6;
 }
 
 /* ===========================
