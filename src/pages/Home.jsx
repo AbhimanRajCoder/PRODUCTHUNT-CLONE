@@ -3,6 +3,7 @@ import "./Home.css";
 import ProductList from "../components/ProductList/ProductList";
 
 function Home({ searchTerm, setSearchTerm }) {
+  const [activeFilter, setActiveFilter] = useState("Popular");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,6 +26,31 @@ function Home({ searchTerm, setSearchTerm }) {
 
     fetchProducts();
   }, []);
+
+  // Sorting and Filtering Logic
+  const getProcessedProducts = () => {
+    let processed = [...products];
+
+    // Apply Sorting/Filtering based on active filter
+    if (activeFilter === "Popular") {
+      processed.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
+    } else if (activeFilter === "Newest") {
+      processed.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    } else if (activeFilter === "Featured") {
+      processed = processed.filter(p => p.isFeatured);
+      processed.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
+    }
+
+    // Apply Search Term Filter
+    return processed.filter(product => {
+      if (!searchTerm) return true;
+      const lowerSearch = searchTerm.toLowerCase();
+      const nameMatch = product.name?.toLowerCase().includes(lowerSearch);
+      const taglineMatch = product.tagline?.toLowerCase().includes(lowerSearch);
+      const categoryMatch = product.category?.toLowerCase().includes(lowerSearch);
+      return nameMatch || taglineMatch || categoryMatch;
+    });
+  };
 
   // Get today's date for the header
   const today = new Date().toLocaleDateString("en-US", {
@@ -79,9 +105,24 @@ function Home({ searchTerm, setSearchTerm }) {
               <p className="feed-date">{today}</p>
             </div>
             <div className="feed-filters">
-              <button className="filter-btn active">Popular</button>
-              <button className="filter-btn">Newest</button>
-              <button className="filter-btn">Featured</button>
+              <button 
+                className={`filter-btn ${activeFilter === "Popular" ? "active" : ""}`}
+                onClick={() => setActiveFilter("Popular")}
+              >
+                Popular
+              </button>
+              <button 
+                className={`filter-btn ${activeFilter === "Newest" ? "active" : ""}`}
+                onClick={() => setActiveFilter("Newest")}
+              >
+                Newest
+              </button>
+              <button 
+                className={`filter-btn ${activeFilter === "Featured" ? "active" : ""}`}
+                onClick={() => setActiveFilter("Featured")}
+              >
+                Featured
+              </button>
             </div>
           </div>
 
@@ -93,16 +134,7 @@ function Home({ searchTerm, setSearchTerm }) {
           )}
           {error && <p className="error-message">Error: {error}</p>}
           {!loading && !error && (
-            <ProductList 
-              products={products.filter(product => {
-                if (!searchTerm) return true;
-                const lowerSearch = searchTerm.toLowerCase();
-                const nameMatch = product.name?.toLowerCase().includes(lowerSearch);
-                const taglineMatch = product.tagline?.toLowerCase().includes(lowerSearch);
-                const categoryMatch = product.category?.toLowerCase().includes(lowerSearch);
-                return nameMatch || taglineMatch || categoryMatch;
-              })} 
-            />
+            <ProductList products={getProcessedProducts()} />
           )}
         </section>
 
