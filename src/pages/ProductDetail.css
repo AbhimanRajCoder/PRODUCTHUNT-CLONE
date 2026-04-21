@@ -46,8 +46,8 @@
 .detail-logo {
   width: 80px;
   height: 80px;
-  background: var(--bg-color);
-  border-radius: 12px;
+  background: linear-gradient(135deg, #fff5f3, #ffe8e4);
+  border-radius: var(--radius);
   display: flex;
   align-items: center;
   justify-content: center;
