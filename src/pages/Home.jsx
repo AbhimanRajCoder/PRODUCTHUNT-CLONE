@@ -4,7 +4,8 @@ import ProductList from "../components/ProductList/ProductList";
 import { api } from "../api/api";
 
 
-function Home({ searchTerm, setSearchTerm }) {
+function Home({ searchTerm, setSearchTerm, onSubscribe }) {
+
   const [activeFilter, setActiveFilter] = useState("Popular");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -215,7 +216,8 @@ function Home({ searchTerm, setSearchTerm }) {
             <p className="newsletter-text">
               Get the best new products in your inbox, every day.
             </p>
-            <button className="subscribe-btn">Subscribe</button>
+            <button className="subscribe-btn" onClick={onSubscribe}>Subscribe</button>
+
           </div>
         </aside>
 
