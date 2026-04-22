@@ -59,6 +59,7 @@
   display: flex;
   align-items: center;
   height: 44px;
+  cursor: pointer;
 }
 
 .search-box svg {
@@ -82,6 +83,12 @@
   font-weight: 500;
   outline: none;
   transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.search-box:hover input {
+  border-color: #d1d5db;
+  background: #f3f4f6;
 }
 
 .search-box input:focus {
