@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './ProductDetail.css';
+import { api } from '../api/api';
+
 
 function ProductDetail() {
   const { id } = useParams();
@@ -12,11 +14,10 @@ function ProductDetail() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/products/${id}`);
-        if (!response.ok) {
+        const data = await api.getProductById(id);
+        if (!data) {
           throw new Error('Product not found');
         }
-        const data = await response.json();
         setProduct(data);
       } catch (err) {
         setError(err.message);
@@ -27,6 +28,7 @@ function ProductDetail() {
 
     fetchProduct();
   }, [id]);
+
 
   if (loading) return <div className="detail-container loading">Loading product details...</div>;
   if (error) return <div className="detail-container error">Error: {error}</div>;

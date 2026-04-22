@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './ProductCard.css';
+import { api } from '../../api/api';
+
 
 function ProductCard({ product }) {
   const navigate = useNavigate();
@@ -16,15 +18,12 @@ function ProductCard({ product }) {
     setUpvotes(newUpvoteCount);
 
     try {
-      await fetch(`http://localhost:5001/products/${product.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ upvotes: newUpvoteCount }),
-      });
+      await api.updateProduct(product.id, { upvotes: newUpvoteCount });
     } catch (error) {
       setHasVoted(!newVoteStatus);
       setUpvotes(upvotes);
     }
+
   };
 
   return (

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
 import ProductList from "../components/ProductList/ProductList";
+import { api } from "../api/api";
+
 
 function Home({ searchTerm, setSearchTerm }) {
   const [activeFilter, setActiveFilter] = useState("Popular");
@@ -12,11 +14,7 @@ function Home({ searchTerm, setSearchTerm }) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5001/products");
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
-        const data = await response.json();
+        const data = await api.getProducts();
         setProducts(data);
       } catch (err) {
         setError(err.message);
@@ -27,11 +25,8 @@ function Home({ searchTerm, setSearchTerm }) {
 
     const fetchThreads = async () => {
       try {
-        const response = await fetch("http://localhost:5001/threads");
-        if (response.ok) {
-          const data = await response.json();
-          setThreads(data);
-        }
+        const data = await api.getThreads();
+        setThreads(data);
       } catch (err) {
         console.error("Failed to fetch threads:", err);
       }
@@ -40,6 +35,7 @@ function Home({ searchTerm, setSearchTerm }) {
     fetchProducts();
     fetchThreads();
   }, []);
+
 
   // Sorting and Filtering Logic
   const getProcessedProducts = () => {
