@@ -2,6 +2,156 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import { SearchModal } from "../Modal/Modal";
 
+const NAV_DROPDOWNS = {
+  launches: [
+    {
+      title: "Launch archive",
+      description: "Most-loved launches by the community",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.71.79-1.81.19-2.49A2 2 0 0 1 4.5 16.5z" />
+          <path d="M7 15l-3 3" />
+          <path d="M11 9l-4 4" />
+          <path d="M14.5 4.5c2.1-2.1 6-1.5 6-1.5s.6 3.9-1.5 6a5 5 0 0 1-4.5 1.5l-3 3-4-4 3-3a5 5 0 0 1 1.5-4.5z" />
+          <path d="M15 9l-2 2" />
+          <path d="M13 15l2 2" />
+        </svg>
+      ),
+      bgColor: "rgba(255, 97, 84, 0.1)",
+      iconColor: "#FF6154"
+    },
+    {
+      title: "Launch Guide",
+      description: "Checklists and pro tips for launching",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+        </svg>
+      ),
+      bgColor: "rgba(64, 123, 255, 0.1)",
+      iconColor: "#407BFF"
+    }
+  ],
+  news: [
+    {
+      title: "Newsletter",
+      description: "The best of Product Hunt, every day",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+          <polyline points="22,6 12,13 2,6" />
+        </svg>
+      ),
+      bgColor: "rgba(124, 58, 237, 0.1)",
+      iconColor: "#7c3aed"
+    },
+    {
+      title: "Stories",
+      description: "Tech news, interviews, and tips from makers",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+        </svg>
+      ),
+      bgColor: "rgba(236, 72, 153, 0.1)",
+      iconColor: "#ec4899"
+    },
+    {
+      title: "Changelog",
+      description: "New Product Hunt features and releases",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+          <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+          <path d="M9 14l2 2 4-4" />
+        </svg>
+      ),
+      bgColor: "rgba(34, 197, 94, 0.1)",
+      iconColor: "#22c55e"
+    }
+  ],
+  forums: [
+    {
+      title: "Forums",
+      description: "Ask questions, find support, and connect",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+        </svg>
+      ),
+      bgColor: "rgba(139, 92, 246, 0.1)",
+      iconColor: "#8b5cf6"
+    },
+    {
+      title: "Kitty Points Leaderboard",
+      description: "The highest scoring community members",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.71.79-1.81.19-2.49A2 2 0 0 1 4.5 16.5z" />
+          <path d="M7 15l-3 3" />
+          <path d="M11 9l-4 4" />
+          <path d="M14.5 4.5c2.1-2.1 6-1.5 6-1.5s.6 3.9-1.5 6a5 5 0 0 1-4.5 1.5l-3 3-4-4 3-3a5 5 0 0 1 1.5-4.5z" />
+        </svg>
+      ),
+      bgColor: "rgba(249, 115, 22, 0.1)",
+      iconColor: "#f97316"
+    },
+    {
+      title: "Streaks",
+      description: "The most active community members",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.5 3.5 6.5 1.5 2 2 4.5 2 7a6 6 0 1 1-12 0c0-1.38.5-3 1-4.5 1-2.5 1.5-4.5 1-6.5.5 2 1 3 2 4.5z" />
+        </svg>
+      ),
+      bgColor: "rgba(239, 68, 68, 0.1)",
+      iconColor: "#ef4444"
+    },
+    {
+      title: "Events",
+      description: "Meet others online and in-person",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="3" y1="10" x2="21" y2="10" />
+        </svg>
+      ),
+      bgColor: "rgba(16, 185, 129, 0.1)",
+      iconColor: "#10b981"
+    }
+  ]
+};
+
+const NavItemWithDropdown = ({ title, items, href }) => {
+  return (
+    <li className="nav-item-container">
+      <a href={href} onClick={(e) => e.preventDefault()}>
+        {title}
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M3.5 6.25 7 9.75l3.5-3.5" />
+        </svg>
+      </a>
+      <div className="dropdown-menu">
+        {items.map((item, index) => (
+          <a key={index} href={`#${item.title.toLowerCase().replace(/ /g, '-')}`} className="dropdown-item">
+            <div className="dropdown-icon-wrapper" style={{ backgroundColor: item.bgColor, color: item.iconColor }}>
+              {item.icon}
+            </div>
+            <div className="dropdown-info">
+              <h4 className="dropdown-title">{item.title}</h4>
+              <p className="dropdown-description">{item.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </li>
+  );
+};
+
 export function Navbar({ searchTerm, setSearchTerm, onSubscribe }) {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,21 +196,9 @@ export function Navbar({ searchTerm, setSearchTerm, onSubscribe }) {
                   </svg>
                 </a>
               </li>
-              <li><a href="/leaderboard">Launches
-                               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M3.5 6.25 7 9.75l3.5-3.5" />
-                  </svg>
-              </a></li>
-              <li><a href="/newsletters">News
-                               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M3.5 6.25 7 9.75l3.5-3.5" />
-                  </svg>
-              </a></li>
-              <li><a href="/forums">Forums
-                               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M3.5 6.25 7 9.75l3.5-3.5" />
-                  </svg>
-              </a></li>
+              <NavItemWithDropdown title="Launches" items={NAV_DROPDOWNS.launches} href="/leaderboard" />
+              <NavItemWithDropdown title="News" items={NAV_DROPDOWNS.news} href="/newsletters" />
+              <NavItemWithDropdown title="Forums" items={NAV_DROPDOWNS.forums} href="/forums" />
               <li className="hide-mobile">
                 <a href="/sponsor">Advertise
                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2">
