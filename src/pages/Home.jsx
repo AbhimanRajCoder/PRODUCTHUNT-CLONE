@@ -82,11 +82,11 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
             <Link to="/" className={`sidebar-link ${location.pathname === "/" ? "active" : ""}`}>
               <span className="sidebar-icon">🏠</span> Home
             </Link>
-            <Link to="/launches" className={`sidebar-link ${location.pathname === "/launches" ? "active" : ""}`}>
-              <span className="sidebar-icon">🚀</span> Launches
-            </Link>
             <Link to="/products" className={`sidebar-link ${location.pathname === "/products" ? "active" : ""}`}>
               <span className="sidebar-icon">📦</span> Products
+            </Link>
+            <Link to="/launches" className={`sidebar-link ${location.pathname === "/launches" ? "active" : ""}`}>
+              <span className="sidebar-icon">🚀</span> Launches
             </Link>
             <Link to="/news" className={`sidebar-link ${location.pathname === "/news" ? "active" : ""}`}>
               <span className="sidebar-icon">📰</span> News
@@ -94,8 +94,8 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
             <Link to="/community" className={`sidebar-link ${location.pathname === "/community" ? "active" : ""}`}>
               <span className="sidebar-icon">👥</span> Community
             </Link>
-            <Link to="/topics" className={`sidebar-link ${location.pathname === "/topics" ? "active" : ""}`}>
-              <span className="sidebar-icon">🏷️</span> Topics
+            <Link to="/advertise" className={`sidebar-link ${location.pathname === "/advertise" ? "active" : ""}`}>
+              <span className="sidebar-icon">📢</span> Advertise
             </Link>
           </div>
 

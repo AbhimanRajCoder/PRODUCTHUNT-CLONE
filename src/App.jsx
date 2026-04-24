@@ -96,20 +96,6 @@ function App() {
               />
             } 
           />
-          <Route 
-            path="/topics" 
-            element={
-              <ComingSoon 
-                title="Trending" 
-                highlight="Topics" 
-                icon="🏷️"
-                text="Organizing the chaos of creativity. We're categorizing every spark of genius into a library of inspiration."
-                quote="Information is not knowledge. The only source of knowledge is experience."
-                author="Albert Einstein"
-                status="Tagging the universe..."
-              />
-            } 
-          />
           
         </Routes>
 

@@ -309,7 +309,7 @@ export function Navbar({ searchTerm, setSearchTerm, onSubscribe }) {
 
           <nav className="navbar-center">
             <ul>
-              <NavItemWithDropdown title="Best Products" items={NAV_DROPDOWNS.bestProducts} href="/products" />
+              <NavItemWithDropdown title="Products" items={NAV_DROPDOWNS.bestProducts} href="/products" />
               <NavItemWithDropdown title="Launches" items={NAV_DROPDOWNS.launches} href="/launches" />
               <NavItemWithDropdown title="News" items={NAV_DROPDOWNS.news} href="/news" />
               <NavItemWithDropdown title="Forums" items={NAV_DROPDOWNS.forums} href="/community" />
