@@ -74,75 +74,8 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
 
   return (
     <main className="home-page">
-      <div className="home-container">
-
-        {/* Left Sidebar */}
-        <aside className="home-sidebar-left">
-          <div className="sidebar-nav">
-            <Link to="/" className={`sidebar-link ${location.pathname === "/" ? "active" : ""}`}>
-              <span className="sidebar-icon">🏠</span> Home
-            </Link>
-            <Link to="/products" className={`sidebar-link ${location.pathname === "/products" ? "active" : ""}`}>
-              <span className="sidebar-icon">📦</span> Products
-            </Link>
-            <Link to="/launches" className={`sidebar-link ${location.pathname === "/launches" ? "active" : ""}`}>
-              <span className="sidebar-icon">🚀</span> Launches
-            </Link>
-            <Link to="/news" className={`sidebar-link ${location.pathname === "/news" ? "active" : ""}`}>
-              <span className="sidebar-icon">📰</span> News
-            </Link>
-            <Link to="/community" className={`sidebar-link ${location.pathname === "/community" ? "active" : ""}`}>
-              <span className="sidebar-icon">👥</span> Community
-            </Link>
-            <Link to="/advertise" className={`sidebar-link ${location.pathname === "/advertise" ? "active" : ""}`}>
-              <span className="sidebar-icon">📢</span> Advertise
-            </Link>
-          </div>
-
-          <div className="sidebar-section threads-section">
-            <h4 className="sidebar-heading">Trending Forum Threads</h4>
-            <div className="threads-list">
-              {threads.map(thread => (
-                <div key={thread.id} className="thread-item">
-                  <div className="thread-meta">
-                    <span className="thread-icon">{thread.icon}</span>
-                    <span className="thread-community">{thread.community}</span>
-                  </div>
-                  <h5 className="thread-title">{thread.title}</h5>
-                  <div className="thread-stats">
-                    <span className="thread-stat">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="18 15 12 9 6 15" /></svg>
-                      Upvote ({thread.upvotes})
-                    </span>
-                    <span className="stat-dot">·</span>
-                    <span className="thread-stat">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
-                      {thread.comments}
-                    </span>
-                    {thread.online > 0 && (
-                      <>
-                        <span className="stat-dot">·</span>
-                        <span className="thread-stat">
-                          <span className="online-dot"></span>
-                          {thread.online} online
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="threads-actions">
-              <button className="btn-thread-secondary">View all</button>
-              <button className="btn-thread-primary">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /><path d="M12 7v6M9 10h6" /></svg>
-                Start new thread
-              </button>
-            </div>
-          </div>
-        </aside>
-
-        {/* Main Feed */}
+      <div className="home-grid-container">
+        {/* LEFT - Main Feed */}
         <section className="home-feed">
           {/* Feed Header */}
           <div className="feed-header">
@@ -185,8 +118,9 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
         </section>
 
         {/* Right Sidebar */}
+        {/* RIGHT - Sidebar */}
         <aside className="home-sidebar-right">
-          <div className="sidebar-section">
+          <div className="sidebar-card">
             <h4 className="sidebar-heading">🔥 Launch of the Day</h4>
             <div className="launch-card">
               <span className="launch-emoji">🎨</span>
@@ -197,29 +131,47 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
             </div>
           </div>
 
-          <div className="sidebar-section">
+          <div className="sidebar-card">
             <h4 className="sidebar-heading">📢 Upcoming Launches</h4>
-            <div className="upcoming-item">
-              <span className="upcoming-dot"></span>
-              <p>InfiniteCanvas — AI whiteboard</p>
-            </div>
-            <div className="upcoming-item">
-              <span className="upcoming-dot"></span>
-              <p>DevNotes 3.0 — Code journaling</p>
-            </div>
-            <div className="upcoming-item">
-              <span className="upcoming-dot"></span>
-              <p>CloudBase — Serverless backend</p>
+            <div className="upcoming-list">
+              <div className="upcoming-item">
+                <span className="upcoming-dot"></span>
+                <p>InfiniteCanvas — AI whiteboard</p>
+              </div>
+              <div className="upcoming-item">
+                <span className="upcoming-dot"></span>
+                <p>DevNotes 3.0 — Code journaling</p>
+              </div>
+              <div className="upcoming-item">
+                <span className="upcoming-dot"></span>
+                <p>CloudBase — Serverless backend</p>
+              </div>
             </div>
           </div>
 
-          <div className="sidebar-section">
+          <div className="sidebar-card">
+            <h4 className="sidebar-heading">💬 Trending Forum Threads</h4>
+            <div className="threads-list">
+              {threads.map(thread => (
+                <div key={thread.id} className="thread-item-mini">
+                  <p className="thread-title-mini">{thread.title}</p>
+                  <div className="thread-stats-mini">
+                    <span>Upvote ({thread.upvotes})</span>
+                    <span className="stat-dot">·</span>
+                    <span>{thread.comments} comments</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <button className="sidebar-action-link">View all discussions</button>
+          </div>
+
+          <div className="sidebar-card newsletter-card">
             <h4 className="sidebar-heading">📬 Newsletter</h4>
             <p className="newsletter-text">
               Get the best new products in your inbox, every day.
             </p>
-            <button className="subscribe-btn" onClick={onSubscribe}>Subscribe</button>
-
+            <button className="subscribe-btn-sidebar" onClick={onSubscribe}>Subscribe</button>
           </div>
         </aside>
 
