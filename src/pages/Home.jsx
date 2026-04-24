@@ -112,7 +112,7 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
             <h3 className="threads-header">Trending Forum Threads</h3>
             <div className="threads-scroll-area">
               {threads.map(thread => (
-                <Link key={thread.id} to="/community" className="thread-link-item">
+                <Link key={thread.id} to={`/community/${thread.id}`} className="thread-link-item">
                   <p className="thread-title-text">{thread.title}</p>
                   <div className="thread-meta-data">
                     <span className="thread-stat">

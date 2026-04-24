@@ -9,6 +9,8 @@ import Advertise from './pages/Advertise';
 import Submit from './pages/Submit';
 import ComingSoon from './pages/ComingSoon';
 import { NewsletterModal } from './components/Modal/NewsletterModal';
+import Threads from './pages/Threads';
+import ThreadDetail from './pages/ThreadDetail';
 
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
             } 
           />
           <Route path="/posts/:id" element={<ProductDetail />} />
+          <Route path="/community" element={<Threads />} />
+          <Route path="/community/:id" element={<ThreadDetail />} />
           <Route path="/advertise" element={<Advertise />} />
           <Route path="/submit" element={<Submit />} />
           <Route 

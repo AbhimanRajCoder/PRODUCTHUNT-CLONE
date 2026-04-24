@@ -1,0 +1,169 @@
+.threads-page-root {
+  min-height: 100vh;
+  background-color: #fbfbf9; /* Alabaster from Lucid Minimal theme */
+  width: 100%;
+}
+
+.threads-max-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px 80px 24px;
+}
+
+.threads-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #264653; /* Deep Slate from Lucid Minimal */
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.header-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.threads-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.thread-card {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  gap: 20px;
+}
+
+.thread-card:hover {
+  border-color: #2a9d8f; /* Sage Green */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.thread-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  background: #f3f4f6;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.thread-content {
+  flex: 1;
+}
+
+.thread-community {
+  font-size: 12px;
+  font-weight: 700;
+  color: #2a9d8f; /* Sage Green */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.thread-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #264653;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.thread-meta {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.meta-item svg {
+  color: #9ca3af;
+}
+
+.meta-item.online {
+  color: #2a9d8f;
+}
+
+.online-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #2a9d8f;
+  border-radius: 50%;
+}
+
+.thread-arrow {
+  color: #d1d5db;
+  transition: transform 0.2s ease;
+}
+
+.thread-card:hover .thread-arrow {
+  transform: translateX(4px);
+  color: #2a9d8f;
+}
+
+/* Loading & Error States */
+.threads-page-container.loading,
+.threads-page-container.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+  color: #6b7280;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f4f6;
+  border-top-color: #ff6154;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.btn-primary {
+  background-color: #ff6154;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #e5554a;
+}
