@@ -2,6 +2,29 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Modal.css";
 import { api } from "../../api/api";
+import { useUpvotes } from "../../hooks/useUpvotes";
+
+const SearchResultItem = ({ product, onClose }) => {
+  const { upvotes } = useUpvotes(product.id, product.upvotes);
+  
+  return (
+    <Link 
+      to={`/posts/${product.id}`} 
+      className="search-result-item"
+      onClick={onClose}
+    >
+      <div className="result-thumbnail">{product.thumbnail}</div>
+      <div className="result-info">
+        <h4 className="result-name">{product.name}</h4>
+        <p className="result-tagline">{product.tagline}</p>
+      </div>
+      <div className="result-meta">
+        <span className="result-category">{product.category}</span>
+        <span className="result-votes">▲ {upvotes}</span>
+      </div>
+    </Link>
+  );
+};
 
 export function SearchModal({ isOpen, onClose, searchTerm, setSearchTerm }) {
   const [products, setProducts] = useState([]);
@@ -86,22 +109,11 @@ export function SearchModal({ isOpen, onClose, searchTerm, setSearchTerm }) {
               </h3>
               <div className="search-results-list">
                 {filteredResults.map((product) => (
-                  <Link 
+                  <SearchResultItem 
                     key={product.id} 
-                    to={`/posts/${product.id}`} 
-                    className="search-result-item"
-                    onClick={onClose}
-                  >
-                    <div className="result-thumbnail">{product.thumbnail}</div>
-                    <div className="result-info">
-                      <h4 className="result-name">{product.name}</h4>
-                      <p className="result-tagline">{product.tagline}</p>
-                    </div>
-                    <div className="result-meta">
-                      <span className="result-category">{product.category}</span>
-                      <span className="result-votes">▲ {product.upvotes}</span>
-                    </div>
-                  </Link>
+                    product={product} 
+                    onClose={onClose} 
+                  />
                 ))}
               </div>
             </section>

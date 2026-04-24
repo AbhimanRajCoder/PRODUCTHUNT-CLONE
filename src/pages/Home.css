@@ -5,20 +5,19 @@
 .home-page-root {
   min-height: 100vh;
   background-color: #fdfdfd;
-  /* Removed padding-top: 80px here to avoid duplication with app-container */
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Force top alignment */
-  justify-content: flex-start; /* Force top alignment */
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 100%;
 }
 
 .home-max-container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 24px 24px 80px 24px; /* Reduced top padding, kept side/bottom */
+  padding: 24px 24px 80px 24px;
   display: flex;
-  align-items: flex-start; /* CRITICAL: Force columns to start at top */
+  align-items: flex-start;
   justify-content: flex-start;
   gap: 32px;
   width: 100%;
@@ -34,13 +33,13 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  align-self: flex-start; /* Ensure it starts at the top */
+  align-self: flex-start;
 }
 
 .feed-header-section {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end; /* Align title and filters to bottom of header area */
+  align-items: flex-end;
   margin-bottom: 32px;
   padding-bottom: 16px;
   border-bottom: 1px solid #f3f4f6;
@@ -97,14 +96,14 @@
   width: 320px;
   flex-shrink: 0;
   position: sticky;
-  top: 100px; /* Adjust for fixed Navbar + small offset */
+  top: 100px;
   height: calc(100vh - 120px);
   overflow-y: auto;
   padding-bottom: 40px;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  align-self: flex-start; /* Ensure it starts at the top */
+  align-self: flex-start;
 }
 
 /* Hide scrollbar but keep functionality */
@@ -189,7 +188,6 @@
   padding: 0 8px;
 }
 
-/* Custom scrollbar for threads */
 .threads-scroll-area::-webkit-scrollbar {
   width: 4px;
 }
@@ -219,11 +217,6 @@
   margin-bottom: 6px;
 }
 
-.thread-link-item:hover .thread-title-text {
-  color: #000;
-  text-decoration: underline;
-}
-
 .thread-meta-data {
   display: flex;
   gap: 12px;
@@ -241,9 +234,9 @@
 .view-all-link {
   display: inline-block;
   margin-top: 16px;
+  color: #ff6154;
   font-size: 13px;
   font-weight: 700;
-  color: #ff6154;
   text-decoration: none;
 }
 
@@ -251,92 +244,60 @@
   text-decoration: underline;
 }
 
-/* Loading Spinner */
-.loading-state {
-  padding: 80px 0;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
+/* ===========================
+   Responsive Design
+   =========================== */
 
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid #f3f4f6;
-  border-top-color: #ff6154;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Error State */
-.error-state {
-  padding: 40px;
-  text-align: center;
-  color: #dc2626;
-  background: #fef2f2;
-  border-radius: 12px;
-  font-weight: 600;
-  width: 100%;
-}
-
-/* No Results State */
-.no-results-home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 100px 40px;
-  text-align: center;
-  background: white;
-  border: 1px dashed #e5e7eb;
-  border-radius: 24px;
-  width: 100%;
-}
-
-.no-results-icon {
-  font-size: 64px;
-  margin-bottom: 24px;
-}
-
-.no-results-home h2 {
-  font-size: 24px;
-  font-weight: 800;
-  color: #111827;
-  margin-bottom: 12px;
-}
-
-.no-results-home p {
-  font-size: 16px;
-  color: #6b7280;
-  margin-bottom: 32px;
-  max-width: 400px;
-}
-
-.clear-search-btn {
-  padding: 12px 24px;
-  background: #ff6154;
-  color: white;
-  border-radius: 12px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-
-.clear-search-btn:hover {
-  background: #e5554a;
-  transform: translateY(-2px);
-}
-
-/* Responsive */
 @media (max-width: 1024px) {
-  .home-sidebar-fixed {
-    display: none;
-  }
   .home-max-container {
-    padding: 32px 16px;
+    flex-direction: column;
+    padding: 20px 16px 60px 16px;
+    gap: 40px;
+  }
+
+  .home-sidebar-fixed {
+    width: 100%;
+    position: static;
+    height: auto;
+    overflow-y: visible;
+    padding-bottom: 0;
+  }
+
+  .threads-scroll-area {
+    height: auto;
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .feed-header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .header-title {
+    font-size: 24px;
+  }
+
+  .header-filters {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter-pill {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 20px;
+  }
+
+  .newsletter-premium-card {
+    padding: 24px 20px;
   }
 }

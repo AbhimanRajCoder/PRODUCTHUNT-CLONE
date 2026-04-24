@@ -194,13 +194,114 @@
   border-radius: 16px;
   background: #fff;
   border: 1px solid #f3f4f6;
-}
-
 .stat-card h3 {
   font-size: 48px;
   font-weight: 800;
+  color: #ff6154;
   margin-bottom: 8px;
-  color: #111827;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+
+@media (max-width: 1024px) {
+  .visual-container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    text-align: center;
+  }
+
+  .visual-features {
+    align-items: center;
+  }
+
+  .visual-text h2 {
+    font-size: 36px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .offerings-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .advertise-hero {
+    padding: 80px 24px 60px;
+  }
+
+  .advertise-hero h1 {
+    font-size: 42px;
+    letter-spacing: -1px;
+  }
+
+  .advertise-hero p {
+    font-size: 18px;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .btn-primary-large, .btn-secondary-large {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .logos-ticker {
+    gap: 32px;
+  }
+
+  .logo-item {
+    font-size: 20px;
+  }
+
+  .advertise-visual, .advertise-stats, .advertise-offerings {
+    padding: 60px 24px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .offerings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header h2 {
+    font-size: 32px;
+  }
+
+  .testimonial-text {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .advertise-hero h1 {
+    font-size: 32px;
+  }
+
+  .visual-text h2 {
+    font-size: 28px;
+  }
+
+  .stat-card h3 {
+    font-size: 36px;
+  }
+
+  .faq-question {
+    font-size: 16px;
+  }
 }
 
 .stat-card p {

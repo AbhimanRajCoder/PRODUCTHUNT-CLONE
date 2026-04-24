@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './ProductDetail.css';
 import { api } from '../api/api';
+import { useUpvotes } from '../hooks/useUpvotes';
 
 
 function ProductDetail() {
@@ -11,9 +12,8 @@ function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  // Upvotes state
-  const [upvotes, setUpvotes] = useState(0);
-  const [hasUpvoted, setHasUpvoted] = useState(false);
+  // Use shared upvotes hook
+   const { upvotes, hasUpvoted, toggleUpvote } = useUpvotes(id, product?.upvotes || 0);
   
   // Comments state
   const [comments, setComments] = useState([]);
@@ -28,13 +28,6 @@ function ProductDetail() {
         }
         setProduct(data);
         
-        // Initialize upvotes from product data or localStorage
-        const savedUpvote = localStorage.getItem(`upvoted_product_${id}`);
-        setHasUpvoted(!!savedUpvote);
-        
-        const localUpvoteCount = localStorage.getItem(`upvote_count_product_${id}`);
-        setUpvotes(localUpvoteCount ? parseInt(localUpvoteCount) : data.upvotes);
-
         // Load comments from localStorage
         const savedComments = localStorage.getItem(`product_comments_${id}`);
         if (savedComments) {
@@ -57,19 +50,12 @@ function ProductDetail() {
     fetchProduct();
   }, [id]);
 
-  const handleUpvote = () => {
-    if (hasUpvoted) {
-      const newCount = upvotes - 1;
-      setUpvotes(newCount);
-      setHasUpvoted(false);
-      localStorage.removeItem(`upvoted_product_${id}`);
-      localStorage.setItem(`upvote_count_product_${id}`, newCount);
-    } else {
-      const newCount = upvotes + 1;
-      setUpvotes(newCount);
-      setHasUpvoted(true);
-      localStorage.setItem(`upvoted_product_${id}`, "true");
-      localStorage.setItem(`upvote_count_product_${id}`, newCount);
+  const handleUpvote = async () => {
+    toggleUpvote();
+    try {
+      await api.updateProduct(id, { upvotes: hasUpvoted ? upvotes - 1 : upvotes + 1 });
+    } catch (err) {
+      console.error("Failed to update API:", err);
     }
   };
 

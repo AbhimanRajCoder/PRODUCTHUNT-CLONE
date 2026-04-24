@@ -1,29 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './ProductCard.css';
 import { api } from '../../api/api';
+import { useUpvotes } from '../../hooks/useUpvotes';
 
 
 function ProductCard({ product }) {
   const navigate = useNavigate();
-  const [upvotes, setUpvotes] = useState(product.upvotes);
-  const [hasVoted, setHasVoted] = useState(false);
+  const { upvotes, hasUpvoted, toggleUpvote } = useUpvotes(product.id, product.upvotes);
 
   const handleUpvote = async (e) => {
     e.stopPropagation();
-    const newVoteStatus = !hasVoted;
-    const newUpvoteCount = newVoteStatus ? upvotes + 1 : upvotes - 1;
-    setHasVoted(newVoteStatus);
-    setUpvotes(newUpvoteCount);
+    toggleUpvote();
 
     try {
-      await api.updateProduct(product.id, { upvotes: newUpvoteCount });
+      // Still update API if needed, but the UI is now synced via hook
+      await api.updateProduct(product.id, { upvotes: hasUpvoted ? upvotes - 1 : upvotes + 1 });
     } catch (error) {
-      setHasVoted(!newVoteStatus);
-      setUpvotes(upvotes);
+      console.error("Failed to update API:", error);
     }
-
   };
 
   return (
@@ -86,7 +82,7 @@ function ProductCard({ product }) {
 
         {/* Upvote Box */}
         <div 
-          className={`action-box upvote-box ${hasVoted ? 'active' : ''}`} 
+          className={`action-box upvote-box ${hasUpvoted ? 'active' : ''}`} 
           onClick={handleUpvote}
         >
           <svg
