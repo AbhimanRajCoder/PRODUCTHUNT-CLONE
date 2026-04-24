@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./Home.css";
 import ProductList from "../components/ProductList/ProductList";
 import { api } from "../api/api";
@@ -6,6 +7,7 @@ import { api } from "../api/api";
 
 function Home({ searchTerm, setSearchTerm, onSubscribe }) {
 
+  const location = useLocation();
   const [activeFilter, setActiveFilter] = useState("Popular");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -77,24 +79,24 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
         {/* Left Sidebar */}
         <aside className="home-sidebar-left">
           <div className="sidebar-nav">
-            <a href="/" className="sidebar-link active">
+            <Link to="/" className={`sidebar-link ${location.pathname === "/" ? "active" : ""}`}>
               <span className="sidebar-icon">🏠</span> Home
-            </a>
-            <a href="/launches" className="sidebar-link">
+            </Link>
+            <Link to="/launches" className={`sidebar-link ${location.pathname === "/launches" ? "active" : ""}`}>
               <span className="sidebar-icon">🚀</span> Launches
-            </a>
-            <a href="/products" className="sidebar-link">
+            </Link>
+            <Link to="/products" className={`sidebar-link ${location.pathname === "/products" ? "active" : ""}`}>
               <span className="sidebar-icon">📦</span> Products
-            </a>
-            <a href="/news" className="sidebar-link">
+            </Link>
+            <Link to="/news" className={`sidebar-link ${location.pathname === "/news" ? "active" : ""}`}>
               <span className="sidebar-icon">📰</span> News
-            </a>
-            <a href="/community" className="sidebar-link">
+            </Link>
+            <Link to="/community" className={`sidebar-link ${location.pathname === "/community" ? "active" : ""}`}>
               <span className="sidebar-icon">👥</span> Community
-            </a>
-            <a href="/topics" className="sidebar-link">
+            </Link>
+            <Link to="/topics" className={`sidebar-link ${location.pathname === "/topics" ? "active" : ""}`}>
               <span className="sidebar-icon">🏷️</span> Topics
-            </a>
+            </Link>
           </div>
 
           <div className="sidebar-section threads-section">

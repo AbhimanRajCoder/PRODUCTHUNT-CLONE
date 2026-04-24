@@ -212,15 +212,15 @@ const NAV_DROPDOWNS = {
 const NavItemWithDropdown = ({ title, items, href }) => {
   return (
     <li className="nav-item-container">
-      <a href={href} onClick={(e) => e.preventDefault()}>
+      <Link to={href}>
         {title}
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M3.5 6.25 7 9.75l3.5-3.5" />
         </svg>
-      </a>
+      </Link>
       <div className="dropdown-menu">
         {items.map((item, index) => (
-          <a key={index} href={`#${item.title.toLowerCase().replace(/ /g, '-')}`} className="dropdown-item">
+          <Link key={index} to={href} className="dropdown-item">
             <div className="dropdown-icon-wrapper" style={{ backgroundColor: item.bgColor, color: item.iconColor }}>
               {item.icon}
             </div>
@@ -228,7 +228,7 @@ const NavItemWithDropdown = ({ title, items, href }) => {
               <h4 className="dropdown-title">{item.title}</h4>
               <p className="dropdown-description">{item.description}</p>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
     </li>
@@ -309,10 +309,10 @@ export function Navbar({ searchTerm, setSearchTerm, onSubscribe }) {
 
           <nav className="navbar-center">
             <ul>
-              <NavItemWithDropdown title="Best Products" items={NAV_DROPDOWNS.bestProducts} href="/categories" />
-              <NavItemWithDropdown title="Launches" items={NAV_DROPDOWNS.launches} href="/leaderboard" />
-              <NavItemWithDropdown title="News" items={NAV_DROPDOWNS.news} href="/newsletters" />
-              <NavItemWithDropdown title="Forums" items={NAV_DROPDOWNS.forums} href="/forums" />
+              <NavItemWithDropdown title="Best Products" items={NAV_DROPDOWNS.bestProducts} href="/products" />
+              <NavItemWithDropdown title="Launches" items={NAV_DROPDOWNS.launches} href="/launches" />
+              <NavItemWithDropdown title="News" items={NAV_DROPDOWNS.news} href="/news" />
+              <NavItemWithDropdown title="Forums" items={NAV_DROPDOWNS.forums} href="/community" />
               <li className="hide-mobile">
                 <Link to="/advertise">Advertise</Link>
               </li>
