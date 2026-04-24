@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 import { Navbar } from './components/layout/Navbar';
+import { Footer } from './components/layout/Footer';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import Advertise from './pages/Advertise';
@@ -20,13 +21,14 @@ function App() {
 
   return (
     <Router>
-      <div className="app-container">
+      <div className="app-container flex flex-col min-h-screen">
         <Navbar 
           searchTerm={searchTerm} 
           setSearchTerm={setSearchTerm} 
           onSubscribe={() => setIsNewsletterOpen(true)}
         />
-        <Routes>
+        <main className="flex-1">
+          <Routes>
           <Route 
             path="/" 
             element={
@@ -121,7 +123,10 @@ function App() {
             } 
           />
           
-        </Routes>
+          </Routes>
+        </main>
+
+        <Footer />
 
         <NewsletterModal 
           isOpen={isNewsletterOpen} 
