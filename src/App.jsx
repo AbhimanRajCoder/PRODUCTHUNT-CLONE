@@ -38,6 +38,26 @@ function App() {
           <Route path="/posts/:id" element={<ProductDetail />} />
           <Route path="/advertise" element={<Advertise />} />
           <Route path="/submit" element={<Submit />} />
+          <Route 
+            path="/submit/product" 
+            element={
+              <Submit />
+            } 
+          />
+          <Route 
+            path="/submit/thread" 
+            element={
+              <ComingSoon 
+                title="Start a" 
+                highlight="Thread" 
+                icon="💬"
+                text="The community discussion platform is being prepared. Soon you'll be able to share ideas and ask questions."
+                quote="The art of conversation is the art of hearing as well as of being heard."
+                author="William Hazlitt"
+                status="Opening the floor..."
+              />
+            } 
+          />
           
           {/* Coming Soon Pages */}
           <Route 

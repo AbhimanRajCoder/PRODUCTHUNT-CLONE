@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { SearchModal } from "../Modal/Modal";
@@ -165,35 +165,8 @@ const NAV_DROPDOWNS = {
   ],
   submit: [
     {
-      title: "Submit Product",
-      description: "Launch your product to the world",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-          <line x1="12" y1="22.08" x2="12" y2="12"></line>
-        </svg>
-      ),
-      bgColor: "rgba(255, 97, 84, 0.1)",
-      iconColor: "#FF6154",
-      href: "/submit"
-    },
-    {
-      title: "Submit Job",
-      description: "Hire the best makers",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-        </svg>
-      ),
-      bgColor: "rgba(64, 123, 255, 0.1)",
-      iconColor: "#407BFF",
-      href: "#"
-    },
-    {
-      title: "Submit Startup",
-      description: "List your startup",
+      title: "Launch a product",
+      description: "Share your product with the world",
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.71.79-1.81.19-2.49A2 2 0 0 1 4.5 16.5z"></path>
@@ -202,9 +175,21 @@ const NAV_DROPDOWNS = {
           <path d="M14.5 4.5c2.1-2.1 6-1.5 6-1.5s.6 3.9-1.5 6a5 5 0 0 1-4.5 1.5l-3 3-4-4 3-3a5 5 0 0 1 1.5-4.5z"></path>
         </svg>
       ),
-      bgColor: "rgba(139, 92, 246, 0.1)",
-      iconColor: "#8b5cf6",
-      href: "#"
+      bgColor: "rgba(255, 97, 84, 0.1)",
+      iconColor: "#FF6154",
+      href: "/submit/product"
+    },
+    {
+      title: "Start a thread",
+      description: "Ask a question or start a discussion",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+        </svg>
+      ),
+      bgColor: "rgba(64, 123, 255, 0.1)",
+      iconColor: "#407BFF",
+      href: "/submit/thread"
     }
   ]
 };
@@ -236,29 +221,52 @@ const NavItemWithDropdown = ({ title, items, href }) => {
 };
 
 const SubmitDropdown = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div 
+      ref={dropdownRef}
       style={{ position: 'relative', display: 'flex', alignItems: 'center', height: '100%' }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
-      <Link to="/submit" className="btn-primary" style={{ textDecoration: 'none' }}>
+      <button 
+        onClick={() => setIsOpen(!isOpen)} 
+        className="btn-primary" 
+        style={{ gap: '6px' }}
+      >
         Submit
-      </Link>
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
+          <path d="M3.5 5.25 7 8.75l3.5-3.5" />
+        </svg>
+      </button>
       <div 
-        className="dropdown-menu" 
+        className="dropdown-menu dropdown-submit" 
         style={{ 
-          opacity: isHovered ? 1 : 0, 
-          visibility: isHovered ? 'visible' : 'hidden',
-          transform: isHovered ? 'translateY(0)' : 'translateY(10px)',
+          opacity: isOpen ? 1 : 0, 
+          visibility: isOpen ? 'visible' : 'hidden',
+          transform: isOpen ? 'translateY(0) scale(1)' : 'translateY(10px) scale(0.95)',
           left: 'auto',
-          right: '0'
+          right: '0',
+          transition: 'all 0.15s ease'
         }}
       >
         {NAV_DROPDOWNS.submit.map((item, index) => (
-          <Link key={index} to={item.href || '#'} className="dropdown-item">
+          <Link 
+            key={index} 
+            to={item.href} 
+            className="dropdown-item"
+            onClick={() => setIsOpen(false)}
+          >
             <div className="dropdown-icon-wrapper" style={{ backgroundColor: item.bgColor, color: item.iconColor }}>
               {item.icon}
             </div>
