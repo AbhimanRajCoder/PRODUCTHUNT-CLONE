@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Home.css";
 import ProductList from "../components/ProductList/ProductList";
 import { api } from "../api/api";
 
-
 function Home({ searchTerm, setSearchTerm, onSubscribe }) {
-
-  const location = useLocation();
   const [activeFilter, setActiveFilter] = useState("Popular");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,36 +12,25 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
   const [threads, setThreads] = useState([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       try {
-        const data = await api.getProducts();
-        setProducts(data);
+        const [productsData, threadsData] = await Promise.all([
+          api.getProducts(),
+          api.getThreads()
+        ]);
+        setProducts(productsData);
+        setThreads(threadsData);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
-    const fetchThreads = async () => {
-      try {
-        const data = await api.getThreads();
-        setThreads(data);
-      } catch (err) {
-        console.error("Failed to fetch threads:", err);
-      }
-    };
-
-    fetchProducts();
-    fetchThreads();
+    fetchData();
   }, []);
 
-
-  // Sorting and Filtering Logic
   const getProcessedProducts = () => {
     let processed = [...products];
-
-    // Apply Sorting/Filtering based on active filter
     if (activeFilter === "Popular") {
       processed.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
     } else if (activeFilter === "Newest") {
@@ -54,18 +40,14 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
       processed.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
     }
 
-    // Apply Search Term Filter
     return processed.filter(product => {
       if (!searchTerm) return true;
       const lowerSearch = searchTerm.toLowerCase();
-      const nameMatch = product.name?.toLowerCase().includes(lowerSearch);
-      const taglineMatch = product.tagline?.toLowerCase().includes(lowerSearch);
-      const categoryMatch = product.category?.toLowerCase().includes(lowerSearch);
-      return nameMatch || taglineMatch || categoryMatch;
+      return product.name?.toLowerCase().includes(lowerSearch) || 
+             product.tagline?.toLowerCase().includes(lowerSearch);
     });
   };
 
-  // Get today's date for the header
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
@@ -73,110 +55,87 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
   });
 
   return (
-    <main className="home-page">
-      <div className="home-grid-container">
-        {/* LEFT - Main Feed */}
-        <section className="home-feed">
-          {/* Feed Header */}
-          <div className="feed-header">
-            <div className="feed-title-container">
-              <h1 className="feed-title">Today's Top Products</h1>
-              <p className="feed-date">{today}</p>
+    <div className="home-page-root">
+      <div className="home-max-container">
+        
+        {/* LEFT COLUMN - MAIN FEED */}
+        <main className="home-main-feed">
+          <div className="feed-header-section">
+            <div className="header-text">
+              <h1 className="header-title">Today's Top Products</h1>
+              <p className="header-subtitle">{today}</p>
             </div>
-            <div className="feed-filters">
-              <button 
-                className={`filter-btn ${activeFilter === "Popular" ? "active" : ""}`}
-                onClick={() => setActiveFilter("Popular")}
-              >
-                Popular
-              </button>
-              <button 
-                className={`filter-btn ${activeFilter === "Newest" ? "active" : ""}`}
-                onClick={() => setActiveFilter("Newest")}
-              >
-                Newest
-              </button>
-              <button 
-                className={`filter-btn ${activeFilter === "Featured" ? "active" : ""}`}
-                onClick={() => setActiveFilter("Featured")}
-              >
-                Featured
-              </button>
-            </div>
-          </div>
-
-          {/* Product List */}
-          {loading && (
-            <div className="spinner-container">
-              <div className="loading-spinner"></div>
-            </div>
-          )}
-          {error && <p className="error-message">Error: {error}</p>}
-          {!loading && !error && (
-            <ProductList products={getProcessedProducts()} />
-          )}
-        </section>
-
-        {/* Right Sidebar */}
-        {/* RIGHT - Sidebar */}
-        <aside className="home-sidebar-right">
-          <div className="sidebar-card">
-            <h4 className="sidebar-heading">🔥 Launch of the Day</h4>
-            <div className="launch-card">
-              <span className="launch-emoji">🎨</span>
-              <div>
-                <p className="launch-name">Midjourney V7</p>
-                <p className="launch-tagline">Next-gen AI image generation</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="sidebar-card">
-            <h4 className="sidebar-heading">📢 Upcoming Launches</h4>
-            <div className="upcoming-list">
-              <div className="upcoming-item">
-                <span className="upcoming-dot"></span>
-                <p>InfiniteCanvas — AI whiteboard</p>
-              </div>
-              <div className="upcoming-item">
-                <span className="upcoming-dot"></span>
-                <p>DevNotes 3.0 — Code journaling</p>
-              </div>
-              <div className="upcoming-item">
-                <span className="upcoming-dot"></span>
-                <p>CloudBase — Serverless backend</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="sidebar-card">
-            <h4 className="sidebar-heading">💬 Trending Forum Threads</h4>
-            <div className="threads-list">
-              {threads.map(thread => (
-                <div key={thread.id} className="thread-item-mini">
-                  <p className="thread-title-mini">{thread.title}</p>
-                  <div className="thread-stats-mini">
-                    <span>Upvote ({thread.upvotes})</span>
-                    <span className="stat-dot">·</span>
-                    <span>{thread.comments} comments</span>
-                  </div>
-                </div>
+            
+            <div className="header-filters">
+              {["Popular", "Newest", "Featured"].map(filter => (
+                <button 
+                  key={filter}
+                  className={`filter-pill ${activeFilter === filter ? "active" : ""}`}
+                  onClick={() => setActiveFilter(filter)}
+                >
+                  {filter}
+                </button>
               ))}
             </div>
-            <button className="sidebar-action-link">View all discussions</button>
           </div>
 
-          <div className="sidebar-card newsletter-card">
-            <h4 className="sidebar-heading">📬 Newsletter</h4>
-            <p className="newsletter-text">
-              Get the best new products in your inbox, every day.
-            </p>
-            <button className="subscribe-btn-sidebar" onClick={onSubscribe}>Subscribe</button>
+          <div className="feed-content-area">
+            {loading && (
+              <div className="loading-state">
+                <div className="spinner"></div>
+              </div>
+            )}
+            {error && <div className="error-state">Something went wrong. Please try again.</div>}
+            {!loading && !error && (
+              <ProductList products={getProcessedProducts()} />
+            )}
           </div>
+        </main>
+
+        {/* RIGHT COLUMN - SIDEBAR */}
+        <aside className="home-sidebar-fixed">
+          
+          {/* NEWSLETTER CARD */}
+          <div className="newsletter-premium-card">
+            <div className="newsletter-icon">📬</div>
+            <h3 className="newsletter-title">Join the Newsletter</h3>
+            <p className="newsletter-text">
+              Discover the best new products every day, curated for makers and enthusiasts.
+            </p>
+            <button className="newsletter-btn-primary" onClick={onSubscribe}>
+              Subscribe Now
+            </button>
+          </div>
+
+          {/* TRENDING THREADS CARD */}
+          <div className="threads-premium-card">
+            <h3 className="threads-header">Trending Forum Threads</h3>
+            <div className="threads-scroll-area">
+              {threads.map(thread => (
+                <Link key={thread.id} to="/community" className="thread-link-item">
+                  <p className="thread-title-text">{thread.title}</p>
+                  <div className="thread-meta-data">
+                    <span className="thread-stat">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                      {thread.upvotes}
+                    </span>
+                    <span className="thread-stat">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                      {thread.comments}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <Link to="/community" className="view-all-link">
+              View all discussions →
+            </Link>
+          </div>
+
         </aside>
 
       </div>
-    </main>
+    </div>
   );
 }
 
