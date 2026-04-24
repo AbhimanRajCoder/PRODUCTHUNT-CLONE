@@ -4,6 +4,44 @@ import "./Navbar.css";
 import { SearchModal } from "../Modal/Modal";
 
 const NAV_DROPDOWNS = {
+  bestProducts: [
+    {
+      title: "Trending Products",
+      description: "Most popular tools today",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+          <polyline points="17 6 23 6 23 12"></polyline>
+        </svg>
+      ),
+      bgColor: "rgba(234, 179, 8, 0.1)",
+      iconColor: "#eab308"
+    },
+    {
+      title: "Top Rated",
+      description: "Highest rated products",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+      ),
+      bgColor: "rgba(59, 130, 246, 0.1)",
+      iconColor: "#3b82f6"
+    },
+    {
+      title: "New Arrivals",
+      description: "Recently launched products",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+      ),
+      bgColor: "rgba(16, 185, 129, 0.1)",
+      iconColor: "#10b981"
+    }
+  ],
   launches: [
     {
       title: "Launch archive",
@@ -189,14 +227,7 @@ export function Navbar({ searchTerm, setSearchTerm, onSubscribe }) {
 
           <nav className="navbar-center">
             <ul>
-              <li>
-                <a href="/categories">
-                  Best Products
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M3.5 6.25 7 9.75l3.5-3.5" />
-                  </svg>
-                </a>
-              </li>
+              <NavItemWithDropdown title="Best Products" items={NAV_DROPDOWNS.bestProducts} href="/categories" />
               <NavItemWithDropdown title="Launches" items={NAV_DROPDOWNS.launches} href="/leaderboard" />
               <NavItemWithDropdown title="News" items={NAV_DROPDOWNS.news} href="/newsletters" />
               <NavItemWithDropdown title="Forums" items={NAV_DROPDOWNS.forums} href="/forums" />
