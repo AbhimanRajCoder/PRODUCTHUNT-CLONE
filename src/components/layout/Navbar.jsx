@@ -162,6 +162,50 @@ const NAV_DROPDOWNS = {
       bgColor: "rgba(16, 185, 129, 0.1)",
       iconColor: "#10b981"
     }
+  ],
+  submit: [
+    {
+      title: "Submit Product",
+      description: "Launch your product to the world",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+      ),
+      bgColor: "rgba(255, 97, 84, 0.1)",
+      iconColor: "#FF6154",
+      href: "/submit"
+    },
+    {
+      title: "Submit Job",
+      description: "Hire the best makers",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+      ),
+      bgColor: "rgba(64, 123, 255, 0.1)",
+      iconColor: "#407BFF",
+      href: "#"
+    },
+    {
+      title: "Submit Startup",
+      description: "List your startup",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.71.79-1.81.19-2.49A2 2 0 0 1 4.5 16.5z"></path>
+          <path d="M7 15l-3 3"></path>
+          <path d="M11 9l-4 4"></path>
+          <path d="M14.5 4.5c2.1-2.1 6-1.5 6-1.5s.6 3.9-1.5 6a5 5 0 0 1-4.5 1.5l-3 3-4-4 3-3a5 5 0 0 1 1.5-4.5z"></path>
+        </svg>
+      ),
+      bgColor: "rgba(139, 92, 246, 0.1)",
+      iconColor: "#8b5cf6",
+      href: "#"
+    }
   ]
 };
 
@@ -188,6 +232,44 @@ const NavItemWithDropdown = ({ title, items, href }) => {
         ))}
       </div>
     </li>
+  );
+};
+
+const SubmitDropdown = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div 
+      style={{ position: 'relative', display: 'flex', alignItems: 'center', height: '100%' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Link to="/submit" className="btn-primary" style={{ textDecoration: 'none' }}>
+        Submit
+      </Link>
+      <div 
+        className="dropdown-menu" 
+        style={{ 
+          opacity: isHovered ? 1 : 0, 
+          visibility: isHovered ? 'visible' : 'hidden',
+          transform: isHovered ? 'translateY(0)' : 'translateY(10px)',
+          left: 'auto',
+          right: '0'
+        }}
+      >
+        {NAV_DROPDOWNS.submit.map((item, index) => (
+          <Link key={index} to={item.href || '#'} className="dropdown-item">
+            <div className="dropdown-icon-wrapper" style={{ backgroundColor: item.bgColor, color: item.iconColor }}>
+              {item.icon}
+            </div>
+            <div className="dropdown-info">
+              <h4 className="dropdown-title">{item.title}</h4>
+              <p className="dropdown-description">{item.description}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 };
 
@@ -242,13 +324,7 @@ export function Navbar({ searchTerm, setSearchTerm, onSubscribe }) {
               <svg width="20" height="20" fill="none" viewBox="0 0 20 20" className="size-4"><path stroke="#344054" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.667" d="m11.453 2.195 6.274 4.077c.221.144.332.216.412.313a.8.8 0 0 1 .158.289c.036.12.036.252.036.516v6.11c0 1.4 0 2.1-.272 2.635a2.5 2.5 0 0 1-1.093 1.092c-.535.273-1.235.273-2.635.273H5.667c-1.4 0-2.1 0-2.635-.273a2.5 2.5 0 0 1-1.093-1.092c-.272-.535-.272-1.235-.272-2.635V7.39c0-.264 0-.396.036-.516a.8.8 0 0 1 .157-.29c.08-.096.192-.168.413-.312l6.274-4.077m2.906 0c-.526-.342-.789-.513-1.072-.58a1.7 1.7 0 0 0-.762 0c-.283.067-.546.238-1.072.58m2.906 0 5.16 3.354c.574.372.86.559.96.795a.83.83 0 0 1 .645c-.1.237-.386.423-.96.796l-5.16 3.354c-.526.342-.789.513-1.072.58a1.7 1.7 0 0 1-.762 0c-.283-.067-.546-.238-1.072-.58l-5.16-3.354c-.574-.373-.86-.56-.96-.796a.83.83 0 0 1 0-.645c.1-.236.386-.423.96-.795l5.16-3.354m9.37 13.638-5.536-5m-4.762 0-5.536 5"></path></svg>
               Subscribe
             </button>
-            <Link to="/submit" className="btn-primary" style={{ textDecoration: 'none' }}>
-              <svg width="14" height="14" className="ph-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-              Submit
-            </Link>
+            <SubmitDropdown />
           </div>
 
         </div>
