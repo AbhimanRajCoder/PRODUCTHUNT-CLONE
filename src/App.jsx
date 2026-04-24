@@ -6,6 +6,7 @@ import { Navbar } from './components/layout/Navbar';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import Advertise from './pages/Advertise';
+import Submit from './pages/Submit';
 import { NewsletterModal } from './components/Modal/NewsletterModal';
 
 
@@ -35,6 +36,7 @@ function App() {
           />
           <Route path="/posts/:id" element={<ProductDetail />} />
           <Route path="/advertise" element={<Advertise />} />
+          <Route path="/submit" element={<Submit />} />
         </Routes>
 
         <NewsletterModal 
