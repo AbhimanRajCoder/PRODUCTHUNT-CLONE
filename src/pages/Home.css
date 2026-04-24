@@ -283,6 +283,54 @@
   width: 100%;
 }
 
+/* No Results State */
+.no-results-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 40px;
+  text-align: center;
+  background: white;
+  border: 1px dashed #e5e7eb;
+  border-radius: 24px;
+  width: 100%;
+}
+
+.no-results-icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+}
+
+.no-results-home h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.no-results-home p {
+  font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 32px;
+  max-width: 400px;
+}
+
+.clear-search-btn {
+  padding: 12px 24px;
+  background: #ff6154;
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.clear-search-btn:hover {
+  background: #e5554a;
+  transform: translateY(-2px);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .home-sidebar-fixed {

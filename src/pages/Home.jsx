@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import "./Home.css";
 import ProductList from "../components/ProductList/ProductList";
 import { api } from "../api/api";
 
-function Home({ searchTerm, setSearchTerm, onSubscribe }) {
+function Home({ onSubscribe }) {
+  const [searchParams] = useSearchParams();
+  const searchTerm = searchParams.get("q") || "";
+  
   const [activeFilter, setActiveFilter] = useState("Popular");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,6 +34,18 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
 
   const getProcessedProducts = () => {
     let processed = [...products];
+    
+    // 1. Filter by search term first
+    if (searchTerm) {
+      const lowerSearch = searchTerm.toLowerCase();
+      processed = processed.filter(product => 
+        product.name?.toLowerCase().includes(lowerSearch) || 
+        product.tagline?.toLowerCase().includes(lowerSearch) ||
+        product.category?.toLowerCase().includes(lowerSearch)
+      );
+    }
+
+    // 2. Apply filters/sorting
     if (activeFilter === "Popular") {
       processed.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
     } else if (activeFilter === "Newest") {
@@ -40,13 +55,10 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
       processed.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
     }
 
-    return processed.filter(product => {
-      if (!searchTerm) return true;
-      const lowerSearch = searchTerm.toLowerCase();
-      return product.name?.toLowerCase().includes(lowerSearch) || 
-             product.tagline?.toLowerCase().includes(lowerSearch);
-    });
+    return processed;
   };
+
+  const processedProducts = getProcessedProducts();
 
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
@@ -62,21 +74,25 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
         <main className="home-main-feed">
           <div className="feed-header-section">
             <div className="header-text">
-              <h1 className="header-title">Today's Top Products</h1>
+              <h1 className="header-title">
+                {searchTerm ? `Results for "${searchTerm}"` : "Today's Top Products"}
+              </h1>
               <p className="header-subtitle">{today}</p>
             </div>
             
-            <div className="header-filters">
-              {["Popular", "Newest", "Featured"].map(filter => (
-                <button 
-                  key={filter}
-                  className={`filter-pill ${activeFilter === filter ? "active" : ""}`}
-                  onClick={() => setActiveFilter(filter)}
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
+            {!searchTerm && (
+              <div className="header-filters">
+                {["Popular", "Newest", "Featured"].map(filter => (
+                  <button 
+                    key={filter}
+                    className={`filter-pill ${activeFilter === filter ? "active" : ""}`}
+                    onClick={() => setActiveFilter(filter)}
+                  >
+                    {filter}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="feed-content-area">
@@ -86,8 +102,20 @@ function Home({ searchTerm, setSearchTerm, onSubscribe }) {
               </div>
             )}
             {error && <div className="error-state">Something went wrong. Please try again.</div>}
+            
             {!loading && !error && (
-              <ProductList products={getProcessedProducts()} />
+              <>
+                {processedProducts.length > 0 ? (
+                  <ProductList products={processedProducts} />
+                ) : (
+                  <div className="no-results-home">
+                    <div className="no-results-icon">🔍</div>
+                    <h2>No results found</h2>
+                    <p>We couldn't find any products matching "{searchTerm}".</p>
+                    <Link to="/" className="clear-search-btn">View all products</Link>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </main>

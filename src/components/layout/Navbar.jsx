@@ -307,7 +307,7 @@ export function Navbar({ searchTerm, setSearchTerm, onSubscribe }) {
               </svg>
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Search for products, makers, or topics..."
                 value={searchTerm}
                 readOnly
                 className="navbar-search-trigger"
