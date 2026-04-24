@@ -10,6 +10,14 @@ function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+  // Upvotes state
+  const [upvotes, setUpvotes] = useState(0);
+  const [hasUpvoted, setHasUpvoted] = useState(false);
+  
+  // Comments state
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -19,6 +27,26 @@ function ProductDetail() {
           throw new Error('Product not found');
         }
         setProduct(data);
+        
+        // Initialize upvotes from product data or localStorage
+        const savedUpvote = localStorage.getItem(`upvoted_product_${id}`);
+        setHasUpvoted(!!savedUpvote);
+        
+        const localUpvoteCount = localStorage.getItem(`upvote_count_product_${id}`);
+        setUpvotes(localUpvoteCount ? parseInt(localUpvoteCount) : data.upvotes);
+
+        // Load comments from localStorage
+        const savedComments = localStorage.getItem(`product_comments_${id}`);
+        if (savedComments) {
+          setComments(JSON.parse(savedComments));
+        } else {
+          // Initial mock comments
+          const initialComments = [
+            { id: 1, author: "Early Adopter", text: "This is exactly what I was looking for! The UI is so smooth.", timestamp: new Date().toISOString() },
+            { id: 2, author: "Tech Enthusiast", text: "Does this integrate with Slack? Love the concept though!", timestamp: new Date().toISOString() }
+          ];
+          setComments(initialComments);
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -28,6 +56,39 @@ function ProductDetail() {
 
     fetchProduct();
   }, [id]);
+
+  const handleUpvote = () => {
+    if (hasUpvoted) {
+      const newCount = upvotes - 1;
+      setUpvotes(newCount);
+      setHasUpvoted(false);
+      localStorage.removeItem(`upvoted_product_${id}`);
+      localStorage.setItem(`upvote_count_product_${id}`, newCount);
+    } else {
+      const newCount = upvotes + 1;
+      setUpvotes(newCount);
+      setHasUpvoted(true);
+      localStorage.setItem(`upvoted_product_${id}`, "true");
+      localStorage.setItem(`upvote_count_product_${id}`, newCount);
+    }
+  };
+
+  const handleAddComment = (e) => {
+    e.preventDefault();
+    if (!newComment.trim()) return;
+
+    const commentObj = {
+      id: Date.now(),
+      author: "You",
+      text: newComment,
+      timestamp: new Date().toISOString()
+    };
+
+    const updatedComments = [commentObj, ...comments];
+    setComments(updatedComments);
+    localStorage.setItem(`product_comments_${id}`, JSON.stringify(updatedComments));
+    setNewComment("");
+  };
 
 
   if (loading) return <div className="detail-container loading">Loading product details...</div>;
@@ -51,12 +112,17 @@ function ProductDetail() {
             <div className="detail-meta">
               <span className="detail-category">{product.category}</span>
               <span className="dot">•</span>
-              <span className="detail-votes">{product.upvotes} Upvotes</span>
+              <span className="detail-votes">{upvotes} Upvotes</span>
             </div>
           </div>
           <div className="detail-actions">
             <button className="visit-btn">Visit Website</button>
-            <button className="detail-upvote-btn">▲ Upvote</button>
+            <button 
+              className={`detail-upvote-btn ${hasUpvoted ? 'active' : ''}`}
+              onClick={handleUpvote}
+            >
+              ▲ {hasUpvoted ? 'Upvoted' : 'Upvote'} {upvotes}
+            </button>
           </div>
         </header>
 
@@ -66,29 +132,28 @@ function ProductDetail() {
           <p className="detail-description">{product.description}</p>
         </section>
 
-        {/* Mock Comments Section */}
+        {/* Comments Section */}
         <section className="detail-section">
-          <h2 className="section-title">Comments ({product.comments || 0})</h2>
+          <h2 className="section-title">Comments ({comments.length})</h2>
           <div className="comments-list">
-            <div className="comment-item">
-              <div className="comment-avatar">👤</div>
-              <div className="comment-content">
-                <p className="comment-author">Early Adopter</p>
-                <p className="comment-text">This is exactly what I was looking for! The UI is so smooth.</p>
+            {comments.map(comment => (
+              <div key={comment.id} className="comment-item">
+                <div className="comment-avatar">👤</div>
+                <div className="comment-content">
+                  <p className="comment-author">{comment.author}</p>
+                  <p className="comment-text">{comment.text}</p>
+                </div>
               </div>
-            </div>
-            <div className="comment-item">
-              <div className="comment-avatar">👤</div>
-              <div className="comment-content">
-                <p className="comment-author">Tech Enthusiast</p>
-                <p className="comment-text">Does this integrate with Slack? Love the concept though!</p>
-              </div>
-            </div>
+            ))}
           </div>
-          <div className="comment-box">
-            <textarea placeholder="What do you think?"></textarea>
-            <button className="comment-btn">Post Comment</button>
-          </div>
+          <form className="comment-box" onSubmit={handleAddComment}>
+            <textarea 
+              placeholder="What do you think?"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            ></textarea>
+            <button type="submit" className="comment-btn">Post Comment</button>
+          </form>
         </section>
       </div>
     </div>
