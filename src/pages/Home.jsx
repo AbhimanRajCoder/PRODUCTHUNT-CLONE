@@ -1,66 +1,71 @@
 import React, { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import "./Home.css";
+
 import ProductList from "../components/ProductList/ProductList";
 import { api } from "../api/api";
+
+import "./Home.css";
 
 function Home({ onSubscribe }) {
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get("q") || "";
-  
+
   const [activeFilter, setActiveFilter] = useState("Popular");
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [threads, setThreads] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [trendingThreads, setTrendingThreads] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchHomeData() {
       try {
-        const [productsData, threadsData] = await Promise.all([
+        const [productsResponse, threadsResponse] = await Promise.all([
           api.getProducts(),
           api.getThreads()
         ]);
-        setProducts(productsData);
-        setThreads(threadsData);
-      } catch (err) {
-        setError(err.message);
+        
+        setAllProducts(productsResponse);
+        setTrendingThreads(threadsResponse);
+      } catch (error) {
+        setErrorMessage(error.message);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
-    };
-    fetchData();
+    }
+
+    fetchHomeData();
   }, []);
 
-  const getProcessedProducts = () => {
-    let processed = [...products];
-    
-    // 1. Filter by search term first
+  function getFilteredProducts() {
+    let filtered = [...allProducts];
+
+    // Filter by search term
     if (searchTerm) {
       const lowerSearch = searchTerm.toLowerCase();
-      processed = processed.filter(product => 
-        product.name?.toLowerCase().includes(lowerSearch) || 
-        product.tagline?.toLowerCase().includes(lowerSearch) ||
-        product.category?.toLowerCase().includes(lowerSearch)
-      );
+      filtered = filtered.filter((product) => {
+        const nameMatch = product.name?.toLowerCase().includes(lowerSearch);
+        const taglineMatch = product.tagline?.toLowerCase().includes(lowerSearch);
+        const categoryMatch = product.category?.toLowerCase().includes(lowerSearch);
+        return nameMatch || taglineMatch || categoryMatch;
+      });
     }
 
-    // 2. Apply filters/sorting
+    // Sort or filter by active category
     if (activeFilter === "Popular") {
-      processed.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
+      filtered.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
     } else if (activeFilter === "Newest") {
-      processed.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     } else if (activeFilter === "Featured") {
-      processed = processed.filter(p => p.isFeatured);
-      processed.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
+      filtered = filtered.filter((product) => product.isFeatured);
+      filtered.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
     }
 
-    return processed;
-  };
+    return filtered;
+  }
 
-  const processedProducts = getProcessedProducts();
+  const displayProducts = getFilteredProducts();
 
-  const today = new Date().toLocaleDateString("en-US", {
+  const formattedDate = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
     day: "numeric",
@@ -70,19 +75,18 @@ function Home({ onSubscribe }) {
     <div className="home-page-root">
       <div className="home-max-container">
         
-        {/* LEFT COLUMN - MAIN FEED */}
         <main className="home-main-feed">
           <div className="feed-header-section">
             <div className="header-text">
               <h1 className="header-title">
                 {searchTerm ? `Results for "${searchTerm}"` : "Today's Top Products"}
               </h1>
-              <p className="header-subtitle">{today}</p>
+              <p className="header-subtitle">{formattedDate}</p>
             </div>
             
             {!searchTerm && (
               <div className="header-filters">
-                {["Popular", "Newest", "Featured"].map(filter => (
+                {["Popular", "Newest", "Featured"].map((filter) => (
                   <button 
                     key={filter}
                     className={`filter-pill ${activeFilter === filter ? "active" : ""}`}
@@ -96,34 +100,34 @@ function Home({ onSubscribe }) {
           </div>
 
           <div className="feed-content-area">
-            {loading && (
+            {isLoading && (
               <div className="loading-state">
-                <div className="spinner"></div>
+                <div className="spinner" />
               </div>
             )}
-            {error && <div className="error-state">Something went wrong. Please try again.</div>}
+
+            {errorMessage && (
+              <div className="error-state">
+                Something went wrong. Please try again.
+              </div>
+            )}
             
-            {!loading && !error && (
-              <>
-                {processedProducts.length > 0 ? (
-                  <ProductList products={processedProducts} />
-                ) : (
-                  <div className="no-results-home">
-                    <div className="no-results-icon">🔍</div>
-                    <h2>No results found</h2>
-                    <p>We couldn't find any products matching "{searchTerm}".</p>
-                    <Link to="/" className="clear-search-btn">View all products</Link>
-                  </div>
-                )}
-              </>
+            {!isLoading && !errorMessage && displayProducts.length > 0 && (
+              <ProductList products={displayProducts} />
+            )}
+
+            {!isLoading && !errorMessage && displayProducts.length === 0 && (
+              <div className="no-results-home">
+                <div className="no-results-icon">🔍</div>
+                <h2>No results found</h2>
+                <p>We couldn't find any products matching "{searchTerm}".</p>
+                <Link to="/" className="clear-search-btn">View all products</Link>
+              </div>
             )}
           </div>
         </main>
 
-        {/* RIGHT COLUMN - SIDEBAR */}
         <aside className="home-sidebar-fixed">
-          
-          {/* NEWSLETTER CARD */}
           <div className="newsletter-premium-card">
             <div className="newsletter-icon">📬</div>
             <h3 className="newsletter-title">Join the Newsletter</h3>
@@ -135,20 +139,23 @@ function Home({ onSubscribe }) {
             </button>
           </div>
 
-          {/* TRENDING THREADS CARD */}
           <div className="threads-premium-card">
             <h3 className="threads-header">Trending Forum Threads</h3>
             <div className="threads-scroll-area">
-              {threads.map(thread => (
+              {trendingThreads.map((thread) => (
                 <Link key={thread.id} to={`/community/${thread.id}`} className="thread-link-item">
                   <p className="thread-title-text">{thread.title}</p>
                   <div className="thread-meta-data">
                     <span className="thread-stat">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                        <polyline points="18 15 12 9 6 15" />
+                      </svg>
                       {thread.upvotes}
                     </span>
                     <span className="thread-stat">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                      </svg>
                       {thread.comments}
                     </span>
                   </div>
@@ -159,7 +166,6 @@ function Home({ onSubscribe }) {
               View all discussions →
             </Link>
           </div>
-
         </aside>
 
       </div>
