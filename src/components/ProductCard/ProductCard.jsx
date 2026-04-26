@@ -42,7 +42,13 @@ function ProductCard({ product }) {
       }}
     >
       {/* Left: Thumbnail */}
-      <div className="product-thumbnail">{product.thumbnail}</div>
+      <div className="product-thumbnail">
+        {product.logoUrl ? (
+          <img src={product.logoUrl} alt={product.name} />
+        ) : (
+          product.thumbnail
+        )}
+      </div>
 
       {/* Middle: Product Info */}
       <div className="product-info">

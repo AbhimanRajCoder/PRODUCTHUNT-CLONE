@@ -91,7 +91,13 @@ function ProductDetail() {
 
         {/* Header Section */}
         <header className="detail-header">
-          <div className="detail-logo">{product.thumbnail}</div>
+          <div className="detail-logo">
+            {product.logoUrl ? (
+              <img src={product.logoUrl} alt={product.name} />
+            ) : (
+              product.thumbnail
+            )}
+          </div>
           <div className="detail-headline">
             <h1 className="detail-name">{product.name}</h1>
             <p className="detail-tagline">{product.tagline}</p>

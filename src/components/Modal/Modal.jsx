@@ -13,7 +13,13 @@ const SearchResultItem = ({ product, onClose }) => {
       className="search-result-item"
       onClick={onClose}
     >
-      <div className="result-thumbnail">{product.thumbnail}</div>
+      <div className="result-thumbnail">
+        {product.logoUrl ? (
+          <img src={product.logoUrl} alt={product.name} />
+        ) : (
+          product.thumbnail
+        )}
+      </div>
       <div className="result-info">
         <h4 className="result-name">{product.name}</h4>
         <p className="result-tagline">{product.tagline}</p>
